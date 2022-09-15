@@ -2,9 +2,6 @@ import Link from "next/link";
 import React from "react";
 import { Logo } from "../../assets/logo";
 function Footer() {
-  const mql = window.matchMedia("(max-width: 600px)");
-  let mobileView = mql.matches;
-
   return (
     <div className="w-full mt-10 border-t-2">
       <div className="grid grid-cols-5 mt-5">
