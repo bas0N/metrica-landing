@@ -16,6 +16,7 @@ import {
   useTheme,
 } from "@nextui-org/react";
 import { useTheme as useNextTheme } from "next-themes";
+import Footer from "../components/layout/Footer";
 const Home: NextPage = () => {
   const { setTheme } = useNextTheme();
   const { isDark, type } = useTheme();
@@ -173,7 +174,9 @@ const Home: NextPage = () => {
         </div>
       </main>
 
-      <footer></footer>
+      <footer>
+        <Footer></Footer>
+      </footer>
     </Container>
   );
 };
