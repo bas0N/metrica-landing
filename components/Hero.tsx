@@ -3,7 +3,7 @@ import React from "react";
 
 function Hero() {
   return (
-    <div className="flex flex-col items-center justify-center  mt-32 h-full mb-96">
+    <div className="flex flex-col items-center justify-center  translate-y-40 h-full mb-96">
       <div className=" flex flex-col items-center">
         <Text
           h1
@@ -14,7 +14,7 @@ function Hero() {
           }}
           weight="bold"
         >
-          Asses,
+          Assess,
         </Text>
 
         <Text

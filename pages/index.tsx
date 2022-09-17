@@ -20,6 +20,7 @@ import { useTheme as useNextTheme } from "next-themes";
 import Footer from "../components/layout/Footer";
 import NavbarComponent from "../components/layout/NavbarComponent";
 import ThreeStories from "../components/ThreeStories";
+import VectorStories from "../components/VectorStories";
 const Home: NextPage = () => {
   const { setTheme } = useNextTheme();
   const { isDark, type } = useTheme();
@@ -64,8 +65,9 @@ const Home: NextPage = () => {
       <header className="flex flex-col">
         <NavbarComponent />
       </header>
-      <main>
+      <main className="max-w-[1280px] mx-auto">
         <Hero />
+        <VectorStories />
         <ThreeStories />
       </main>
 

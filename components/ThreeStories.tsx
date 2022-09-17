@@ -3,10 +3,10 @@ import React from "react";
 
 function ThreeStories() {
   return (
-    <div className="flex flex-col lg:flex-row items-center gap-8 lg:justify-around ">
+    <div className="flex flex-col lg:flex-row items-center gap-8 lg:justify-around  ">
       <Card isPressable isHoverable variant="bordered" css={{ mw: "400px" }}>
         <Card.Header>
-          <Text className="font-bold text-3xl">Feature </Text>
+          <Text className="font-bold text-3xl">Feature #1</Text>
         </Card.Header>
         <Card.Divider />
         <Card.Body>
@@ -28,7 +28,7 @@ function ThreeStories() {
       </Card>{" "}
       <Card isPressable isHoverable variant="bordered" css={{ mw: "400px" }}>
         <Card.Header>
-          <Text className="font-bold text-3xl">Feature </Text>
+          <Text className="font-bold text-3xl">Feature #2</Text>
         </Card.Header>
         <Card.Divider />
         <Card.Body>
@@ -50,7 +50,7 @@ function ThreeStories() {
       </Card>{" "}
       <Card isPressable isHoverable variant="bordered" css={{ mw: "400px" }}>
         <Card.Header>
-          <Text className="font-bold text-3xl">Feature </Text>
+          <Text className="font-bold text-3xl">Feature #3</Text>
         </Card.Header>
         <Card.Divider />
         <Card.Body>
