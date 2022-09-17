@@ -27,7 +27,7 @@ function VectorStories() {
           src="https://drive.google.com/uc?export=view&id=1YC-Ml2jRTkyVi8spJhnshkSZYBdjv4L9"
         />
       </div>
-      <div className="flex flex-col-reverse  lg:flex-row items-center border-t-2">
+      <div className="flex flex-col-reverse  lg:flex-row items-center border-t-2 pt-8">
         <img
           className="lg:w-[50%]"
           src="https://drive.google.com/uc?export=view&id=19qQaSvOoooEjKlQAnpjP4dEBkoLnu8C7"

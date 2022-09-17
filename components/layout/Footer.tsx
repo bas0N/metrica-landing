@@ -20,28 +20,28 @@ function Footer() {
       <div className="flex flex-col">
         <Collapse.Group>
           <Collapse title="Option A">
-            <Text>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </Text>
+            <div className="flex flex-col items-end mr-3 ">
+              <Link href="#">Item to be chosen</Link>
+              <Link href="#">Item to be chosen</Link>
+              <Link href="#">Item to be chosen</Link>
+              <Link href="#">Item to be chosen</Link>
+            </div>
           </Collapse>
           <Collapse title="Option A">
-            <Text>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </Text>
+            <div className="flex flex-col items-end mr-3 ">
+              <Link href="#">Item to be chosen</Link>
+              <Link href="#">Item to be chosen</Link>
+              <Link href="#">Item to be chosen</Link>
+              <Link href="#">Item to be chosen</Link>
+            </div>
           </Collapse>
           <Collapse title="Option A">
-            <Text>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </Text>
+            <div className="flex flex-col items-end mr-3 ">
+              <Link href="#">Item to be chosen</Link>
+              <Link href="#">Item to be chosen</Link>
+              <Link href="#">Item to be chosen</Link>
+              <Link href="#">Item to be chosen</Link>
+            </div>
           </Collapse>
         </Collapse.Group>
         <div
@@ -62,7 +62,7 @@ function Footer() {
     );
   } else {
     return (
-      <div className="w-full mt-10 border-t-2">
+      <div className="w-full mt-12 border-t-2  py-12 px-8">
         <div className="grid grid-cols-5 mt-5">
           <div
             className="flex flex-col items-center justify-center
@@ -70,7 +70,7 @@ function Footer() {
           >
             <div className="flex items-center">
               <Logo />
-              <h1>SCRIP MET</h1>
+              <h1 className="text-2xl font-bold">SCRIP MET</h1>
             </div>
             <div className="flex flex-col">
               <h2>ul. Czyżewska 116</h2>
