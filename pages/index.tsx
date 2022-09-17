@@ -4,6 +4,7 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { Container, Row } from "@nextui-org/react";
 import Hero from "../components/Hero";
+import Faq from "../components/Faq";
 import {
   Navbar,
   Button,
@@ -69,6 +70,7 @@ const Home: NextPage = () => {
         <Hero />
         <VectorStories />
         <ThreeStories />
+        <Faq />
       </main>
 
       <footer>
