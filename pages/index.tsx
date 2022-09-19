@@ -63,19 +63,12 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <header className="flex flex-col">
-        <NavbarComponent />
-      </header>
       <main className="max-w-[1280px] mx-auto">
         <Hero />
         <VectorStories />
         <ThreeStories />
         <Faq />
       </main>
-
-      <footer>
-        <Footer></Footer>
-      </footer>
     </Container>
   );
 };
