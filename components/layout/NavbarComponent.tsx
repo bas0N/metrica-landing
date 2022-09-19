@@ -13,8 +13,11 @@ import {
   useTheme,
 } from "@nextui-org/react";
 import { useTheme as useNextTheme } from "next-themes";
+import { useRouter } from "next/router";
 
 function NavbarComponent() {
+  const router = useRouter();
+
   const { setTheme } = useNextTheme();
   const { isDark, type } = useTheme();
   const collapseItems = [
@@ -45,12 +48,21 @@ function NavbarComponent() {
         </Text>
       </Navbar.Brand>
       <Navbar.Content activeColor="success" hideIn="xs" variant="underline">
-        <Navbar.Link href="#">Features</Navbar.Link>
-        <Navbar.Link isActive href="#">
-          Customers
+        <Navbar.Link isActive={router.pathname === "/"} href="/">
+          Main
         </Navbar.Link>
-        <Navbar.Link href="#">Pricing</Navbar.Link>
-        <Navbar.Link href="#">Company</Navbar.Link>
+        <Navbar.Link isActive={router.pathname === "/offer"} href="/offer">
+          Offer
+        </Navbar.Link>
+        <Navbar.Link isActive={router.pathname === "/pricing"} href="/pricing">
+          Pricing
+        </Navbar.Link>
+        <Navbar.Link isActive={router.pathname === "/company"} href="/company">
+          Company
+        </Navbar.Link>
+        <Navbar.Link isActive={router.pathname === "/faq"} href="/faq">
+          FAQ
+        </Navbar.Link>
       </Navbar.Content>
       <Navbar.Content
         css={{
