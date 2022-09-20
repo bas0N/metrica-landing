@@ -41,10 +41,8 @@ function SignIn() {
       >
         <Modal.Header>
           <Text id="modal-title" size={18}>
-            Welcome to
-            <Text b size={18}>
-              NextUI
-            </Text>
+            Sign in to
+            <Text b size={18}>{`STACK MET`}</Text>
           </Text>
         </Modal.Header>
         <Modal.Body>
@@ -52,22 +50,22 @@ function SignIn() {
             clearable
             bordered
             fullWidth
-            color="primary"
+            color="success"
             size="lg"
             placeholder="Email"
             contentLeft={<AiOutlineMail fill="currentColor" />}
           />
-          <Input
+          <Input.Password
             clearable
             bordered
             fullWidth
-            color="primary"
+            color="success"
             size="lg"
             placeholder="Password"
             contentLeft={<RiLockPasswordLine fill="currentColor" />}
           />
           <Row justify="space-between">
-            <Checkbox>
+            <Checkbox color="success">
               <Text size={14}>Remember me</Text>
             </Checkbox>
             <Text size={14}>Forgot password?</Text>
