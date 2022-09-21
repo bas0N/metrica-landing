@@ -3,6 +3,8 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { Container, Row } from "@nextui-org/react";
+import Hero from "../components/Hero";
+import Faq from "../components/Faq";
 import {
   Navbar,
   Button,
@@ -18,6 +20,8 @@ import {
 import { useTheme as useNextTheme } from "next-themes";
 import Footer from "../components/layout/Footer";
 import NavbarComponent from "../components/layout/NavbarComponent";
+import ThreeStories from "../components/ThreeStories";
+import VectorStories from "../components/VectorStories";
 const Home: NextPage = () => {
   const { setTheme } = useNextTheme();
   const { isDark, type } = useTheme();
@@ -59,50 +63,12 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <header className="flex flex-col">
-        <NavbarComponent />
-      </header>
-      <main>
-        <div className="flex flex-col items-center mt-10">
-          <div className=" flex flex-col items-center">
-            <Text
-              h1
-              size={140}
-              css={{
-                textGradient:
-                  "45deg, rgba(2,0,36,1) 0%, rgba(131,255,80,1) 0%, rgba(16,110,7,1) 97%",
-              }}
-              weight="bold"
-            >
-              Asses,
-            </Text>
-
-            <Text
-              h1
-              size={140}
-              css={{
-                textGradient:
-                  "45deg, rgba(2,0,36,1) 0%, rgba(131,255,80,1) 0%, rgba(16,110,7,1) 97%",
-              }}
-              weight="bold"
-            >
-              the best.
-            </Text>
-          </div>
-          <div className="mt-8">
-            <Button
-              size="xl"
-              className="bg-gradient-to-r from-green-500 to-green-900 font-extrabold"
-            >
-              Join stack met
-            </Button>
-          </div>
-        </div>
+      <main className="max-w-[1280px] mx-auto">
+        <Hero />
+        <VectorStories />
+        <ThreeStories />
+        <Faq />
       </main>
-
-      <footer>
-        <Footer></Footer>
-      </footer>
     </Container>
   );
 };

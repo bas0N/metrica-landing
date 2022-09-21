@@ -1,5 +1,5 @@
 import React from "react";
-import { Logo } from "../../assets/logo";
+import { Logo } from "../../assets/Logo";
 import {
   Navbar,
   Button,
@@ -13,8 +13,12 @@ import {
   useTheme,
 } from "@nextui-org/react";
 import { useTheme as useNextTheme } from "next-themes";
-
+import { useRouter } from "next/router";
+import SignIn from "../modals/SignIn";
+import SignUp from "../modals/SignUp";
 function NavbarComponent() {
+  const router = useRouter();
+
   const { setTheme } = useNextTheme();
   const { isDark, type } = useTheme();
   const collapseItems = [
@@ -45,12 +49,21 @@ function NavbarComponent() {
         </Text>
       </Navbar.Brand>
       <Navbar.Content activeColor="success" hideIn="xs" variant="underline">
-        <Navbar.Link href="#">Features</Navbar.Link>
-        <Navbar.Link isActive href="#">
-          Customers
+        <Navbar.Link isActive={router.pathname === "/"} href="/">
+          Main
         </Navbar.Link>
-        <Navbar.Link href="#">Pricing</Navbar.Link>
-        <Navbar.Link href="#">Company</Navbar.Link>
+        <Navbar.Link isActive={router.pathname === "/offer"} href="/offer">
+          Offer
+        </Navbar.Link>
+        <Navbar.Link isActive={router.pathname === "/pricing"} href="/pricing">
+          Pricing
+        </Navbar.Link>
+        <Navbar.Link isActive={router.pathname === "/company"} href="/company">
+          Company
+        </Navbar.Link>
+        <Navbar.Link isActive={router.pathname === "/faq"} href="/faq">
+          FAQ
+        </Navbar.Link>
       </Navbar.Content>
       <Navbar.Content
         css={{
@@ -66,13 +79,9 @@ function NavbarComponent() {
             checked={isDark}
             onChange={(e) => setTheme(e.target.checked ? "dark" : "light")}
           />
-          <Navbar.Link color="inherit" href="#">
-            Login
-          </Navbar.Link>
+          <SignIn />
           <Navbar.Item>
-            <Button auto flat as={Link} color="success" href="#">
-              Sign Up
-            </Button>
+            <SignUp />
           </Navbar.Item>
         </Navbar.Content>
       </Navbar.Content>

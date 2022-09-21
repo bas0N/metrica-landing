@@ -4,6 +4,7 @@ import { NextUIProvider } from "@nextui-org/react";
 // 1. Import `createTheme`
 import { createTheme } from "@nextui-org/react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
+import Layout from "../components/layout/Layout";
 function MyApp({ Component, pageProps }: AppProps) {
   const darkTheme = createTheme({
     type: "dark",
@@ -24,7 +25,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       }}
     >
       <NextUIProvider>
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </NextUIProvider>
     </NextThemesProvider>
   );
