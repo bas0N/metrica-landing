@@ -5,7 +5,7 @@ import { NextUIProvider } from "@nextui-org/react";
 import { createTheme } from "@nextui-org/react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import Layout from "../components/layout/Layout";
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps, ...appProps }: AppProps) {
   const darkTheme = createTheme({
     type: "dark",
     theme: {},
@@ -14,6 +14,21 @@ function MyApp({ Component, pageProps }: AppProps) {
     type: "light",
     theme: {},
   });
+  if ([`/form`].includes(appProps.router.pathname))
+    return (
+      <NextThemesProvider
+        defaultTheme="system"
+        attribute="class"
+        value={{
+          dark: darkTheme.className,
+          light: lightTheme.className,
+        }}
+      >
+        <NextUIProvider>
+          <Component {...pageProps} />
+        </NextUIProvider>
+      </NextThemesProvider>
+    );
 
   return (
     <NextThemesProvider
