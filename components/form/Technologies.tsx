@@ -19,7 +19,7 @@ import kafka from "../../assets/svg/logos/kafka-icon.svg";
 import nginx from "../../assets/svg/logos/nginx.svg";
 //db
 import postgresql from "../../assets/svg/logos/postgresql.svg";
-import mongodb from "../../assets/svg/logos/express.svg";
+import mongodb from "../../assets/svg/logos/mongodb-icon.svg";
 import mysql from "../../assets/svg/logos/mysql.svg";
 import redis from "../../assets/svg/logos/redis.svg";
 import mariadb from "../../assets/svg/logos/mariadb-icon.svg";

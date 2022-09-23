@@ -21,9 +21,14 @@ import { useTheme as useNextTheme } from "next-themes";
 
 import Image from "next/image";
 import Technologies from "../../components/form/Technologies";
+import AboutYou from "../../components/form/AboutYou";
+import Links from "../../components/form/PersonalLinks";
+import PersonalLinks from "../../components/form/PersonalLinks";
+import { SelectProps } from "../../components/input/Select";
 function index() {
   const { setTheme } = useNextTheme();
   const { isDark, type } = useTheme();
+
   return (
     <Container>
       <div className=" flex flex-col">
@@ -44,68 +49,16 @@ function index() {
           reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
           pariatur.
         </h3>
-        <h2 className="text-6xl font-light">PART 1: Technologies</h2>
+        <h2 className="text-6xl font-light mt-4">PART 1: Technologies</h2>
 
         <Technologies />
-        <h2 className="text-6xl font-light">PART 2: About You</h2>
-        <div className="flex flex-col">
-          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400 ">
-            Select an option
-          </label>
-          <select
-            id="countries"
-            className={`text-sm rounded-lg  ${
-              isDark ? "bg-red-300" : "bg-blue-300"
-            }`}
-          >
-            <option selected>Choose a country</option>
-            <option value="US">United States</option>
-            <option value="CA">Canada</option>
-            <option value="FR">France</option>
-            <option value="DE">Germany</option>
-          </select>
-          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400 ">
-            Select an option
-          </label>
-          <select
-            id="countries"
-            className={`text-sm rounded-lg  ${
-              isDark ? "bg-red-300" : "bg-blue-300"
-            }`}
-          >
-            <option selected>Choose a country</option>
-            <option value="US">United States</option>
-            <option value="CA">Canada</option>
-            <option value="FR">France</option>
-            <option value="DE">Germany</option>
-          </select>
-          <Textarea
-            label="Write your thoughts"
-            placeholder="Enter your amazing ideas."
-          />
-        </div>
-        <h2 className="text-6xl font-light ">PART 3: Links</h2>
-        <h2 className="text-3xl mt-10 font-extrabold">Github</h2>
-        <h3 className="font-light my-6">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.{" "}
-        </h3>
-        <Input label="Url" type="url" />
-        <h2 className="text-3xl mt-10 font-extrabold">Repo</h2>
-        <h3 className="font-light my-6">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.{" "}
-        </h3>
-        <Input label="Url" type="url" />
-        <h2 className="text-3xl mt-10 font-extrabold">Linkedin</h2>
-        <h3 className="font-light my-6">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.{" "}
-        </h3>
-        <Input label="Url" type="url" />
+        <h2 className="text-6xl font-light mt-6">PART 2: About You</h2>
+        <AboutYou />
+        <h2 className="text-6xl font-light mt-6">PART 3: Links</h2>
+        <PersonalLinks />
       </div>
-      <Button className="mt-10" shadow color="success" auto>
-        Success
+      <Button className="my-10" shadow color="success">
+        Submit
       </Button>
     </Container>
   );
