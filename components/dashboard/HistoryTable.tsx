@@ -80,9 +80,12 @@ function HistoryTable() {
     switch (columnKey) {
       case "name":
         return (
-          <User squared src={user.avatar} name={cellValue} css={{ p: 0 }}>
-            {user.email}
-          </User>
+          <div>
+            <h3 className="font-bold">{user.name}</h3>
+            <Text b size={13} css={{ color: "$accents7" }}>
+              {user.email}
+            </Text>
+          </div>
         );
       case "role":
         return (
