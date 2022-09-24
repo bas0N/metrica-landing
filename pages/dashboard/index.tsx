@@ -1,14 +1,14 @@
 import React from "react";
+import HistoryTable from "../../components/dashboard/HistoryTable";
+import DashboardLayout from "../../components/layout/DashboardLayout";
 
 function index() {
   return (
     <div className="">
-      <div className="grid grid-cols-5 h-screen">
-        <div className=" bg-cyan-600">navigation</div>
-        <div className="col-span-4 bg-teal-600"> content</div>
-      </div>
+      <HistoryTable />
     </div>
   );
 }
 
+index.PageLayout = DashboardLayout;
 export default index;

@@ -22,7 +22,9 @@ import Footer from "../components/layout/Footer";
 import NavbarComponent from "../components/layout/NavbarComponent";
 import ThreeStories from "../components/ThreeStories";
 import VectorStories from "../components/VectorStories";
-const Home: NextPage = () => {
+import Layout from "../components/layout/Layout";
+import DashboardLayout from "../components/layout/DashboardLayout";
+const Home = () => {
   const { setTheme } = useNextTheme();
   const { isDark, type } = useTheme();
   const collapseItems = [
@@ -72,5 +74,4 @@ const Home: NextPage = () => {
     </Container>
   );
 };
-
 export default Home;
