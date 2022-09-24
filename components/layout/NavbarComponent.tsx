@@ -3,7 +3,6 @@ import { Logo } from "../../assets/Logo";
 import {
   Navbar,
   Button,
-  Link,
   Text,
   Card,
   Radio,
@@ -12,10 +11,12 @@ import {
   Switch,
   useTheme,
 } from "@nextui-org/react";
+import { Link as UiLink } from "@nextui-org/react";
 import { useTheme as useNextTheme } from "next-themes";
 import { useRouter } from "next/router";
 import SignIn from "../modals/SignIn";
 import SignUp from "../modals/SignUp";
+import Link from "next/link";
 function NavbarComponent() {
   const router = useRouter();
 
@@ -36,18 +37,22 @@ function NavbarComponent() {
   return (
     <Navbar isBordered variant="sticky">
       <Navbar.Toggle showIn="xs" />
-      <Navbar.Brand
-        css={{
-          "@xs": {
-            w: "12%",
-          },
-        }}
-      >
-        <Logo />
-        <Text b color="inherit" hideIn="xs">
-          STACK METRICS
-        </Text>
-      </Navbar.Brand>
+      <Link href="/">
+        <Navbar.Brand
+          className="cursor-pointer"
+          css={{
+            "@xs": {
+              w: "12%",
+            },
+          }}
+        >
+          <Logo />
+          <Text className="cursor-pointer" b color="inherit" hideIn="xs">
+            STACK METRICS
+          </Text>
+        </Navbar.Brand>
+      </Link>
+
       <Navbar.Content activeColor="success" hideIn="xs" variant="underline">
         <Navbar.Link isActive={router.pathname === "/"} href="/">
           Main
@@ -95,7 +100,7 @@ function NavbarComponent() {
             }}
             isActive={index === 2}
           >
-            <Link
+            <UiLink
               color="inherit"
               css={{
                 minWidth: "100%",
@@ -103,7 +108,7 @@ function NavbarComponent() {
               href="#"
             >
               {item}
-            </Link>
+            </UiLink>
           </Navbar.CollapseItem>
         ))}
         <Navbar.CollapseItem>

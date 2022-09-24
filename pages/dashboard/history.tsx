@@ -1,5 +1,15 @@
 import React from "react";
-import { Table, Row, Col, Tooltip, User, Text } from "@nextui-org/react";
+import {
+  Table,
+  Row,
+  Col,
+  Tooltip,
+  User,
+  Text,
+  Button,
+  Grid,
+  Pagination,
+} from "@nextui-org/react";
 import { StyledBadge } from "../../components/table/StyledBadge";
 import { IconButton } from "../../components/table/IconButton";
 import { EyeIcon } from "../../components/table/EyeIcon";
@@ -127,36 +137,57 @@ function history() {
     }
   };
   return (
-    <Table
-      aria-label="Example table with custom cells"
-      css={{
-        height: "auto",
-        minWidth: "100%",
-      }}
-      selectionMode="none"
-    >
-      <Table.Header columns={columns}>
-        {(column) => (
-          <Table.Column
-            key={column.uid}
-            hideHeader={column.uid === "actions"}
-            align={column.uid === "actions" ? "center" : "start"}
-          >
-            {column.name}
-          </Table.Column>
-        )}
-      </Table.Header>
-      <Table.Body items={users}>
-        {(item) => (
-          <Table.Row>
-            {(columnKey) => (
-              <Table.Cell>{renderCell(item, columnKey)}</Table.Cell>
-            )}
-          </Table.Row>
-        )}
-      </Table.Body>
-    </Table>
+    <div className="flex flex-col">
+      <Table
+        aria-label="Example table with custom cells"
+        css={{
+          height: "auto",
+          minWidth: "100%",
+        }}
+        selectionMode="none"
+      >
+        <Table.Header columns={columns}>
+          {(column) => (
+            <Table.Column
+              key={column.uid}
+              hideHeader={column.uid === "actions"}
+              align={column.uid === "actions" ? "center" : "start"}
+            >
+              {column.name}
+            </Table.Column>
+          )}
+        </Table.Header>
+        <Table.Body items={users}>
+          {(item) => (
+            <Table.Row>
+              {(columnKey) => (
+                <Table.Cell>{renderCell(item, columnKey)}</Table.Cell>
+              )}
+            </Table.Row>
+          )}
+        </Table.Body>
+      </Table>
+
+      <div className="flex justify-end mt-3">
+        <Button className="bg-green-500 mx-1 hover:bg-green-600">
+          Action1
+        </Button>
+        <Button className="bg-green-500 mx-1 hover:bg-green-600">
+          Action2
+        </Button>
+        <Button className="bg-green-500 mx-1 hover:bg-green-600">
+          Action3
+        </Button>
+      </div>
+      <Pagination
+        className="self-center mt-6"
+        shadow
+        color="success"
+        total={10}
+      />
+    </div>
   );
 }
+history;
 
 export default history;

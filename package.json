@@ -8,6 +8,10 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "typeRoots": [
+    "../node_modules/@types",
+    "../@types"
+  ],
   "dependencies": {
     "@nextui-org/react": "^1.0.0-beta.10",
     "next": "12.3.0",
@@ -15,6 +19,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.4.0",
+    "react-tiny-link": "^3.6.1",
     "redux": "^4.2.0"
   },
   "devDependencies": {

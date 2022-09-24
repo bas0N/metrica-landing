@@ -62,7 +62,7 @@ function Footer() {
     );
   } else {
     return (
-      <div className="w-full mt-12 border-t-2  py-12 px-8">
+      <div className="w-full  border-t-2  py-12 px-8">
         <div className="grid grid-cols-5 mt-5">
           <div
             className="flex flex-col items-center justify-center
