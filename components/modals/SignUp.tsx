@@ -18,12 +18,13 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import { ChangeEvent } from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { register } from "../../features/auth/authSlice";
+import { register, reset } from "../../features/auth/authSlice";
+
 import { AppDispatch } from "../../app/store";
 import { RegisterUserDto } from "../../features/auth/dto/registerUser.dto";
 function SignUp() {
   const dispatch = useDispatch<AppDispatch>();
-  const { user, isLoading, isSuccess, message } = useSelector(
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
     (state: any) => state.auth
   );
 
@@ -73,6 +74,16 @@ function SignUp() {
     }
     setProgress((progressScore / 3) * 100);
   }, [email.valid, password.valid, passwordRepeat.valid]);
+  useEffect(() => {
+    if (isError) {
+      alert("błąd!!");
+    }
+    if (isSuccess || user) {
+      //redirect
+      alert("success!, redirect");
+    }
+    dispatch(reset());
+  }, [user, isLoading, isError, isSuccess, message]);
   // const handleProgressChange = () => {
   //   let progressScore = 0;
   //   console.log("password: ", password.valid);

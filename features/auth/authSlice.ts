@@ -1,8 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { authService } from "./authService";
 import { RegisterUserDto } from "./dto/registerUser.dto";
+import { useEffect } from "react";
 const initialState = {
-  user: "Brad",
+  user: "",
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -16,7 +17,7 @@ export const register = createAsyncThunk(
       console.log("auth slice");
       return await authService.register(user);
     } catch (err) {
-      const message = err.toString();
+      const message: string = err.toString();
       return thunkAPI.rejectWithValue(message);
     }
   }
@@ -31,8 +32,32 @@ export const login = createAsyncThunk(
 export const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
-  extraReducers: (builder) => {},
-});
+  reducers: {
+    reset: (state) => {
+      state.isLoading = false;
+      state.isError = false;
+      state.isSuccess = false;
+      state.message = "false";
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(register.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(register.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.user = action.payload!;
+      })
+      .addCase(register.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload as string;
 
+        state.user = "";
+      });
+  },
+});
+export const { reset } = authSlice.actions;
 export default authSlice.reducer;
