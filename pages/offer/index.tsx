@@ -168,7 +168,7 @@ function index() {
                   <Popover offset={30} placement="right">
                     <Popover.Trigger>
                       <Button auto bordered color="secondary">
-                        "right"
+                        right
                       </Button>
                     </Popover.Trigger>
                     <Popover.Content className="w-64">

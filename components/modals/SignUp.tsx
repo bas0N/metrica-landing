@@ -36,7 +36,7 @@ function SignUp() {
   );
   return (
     <div>
-      <Button light color="success" flat as={Link} auto onClick={handler}>
+      <Button light color="success" flat as={Link} auto onPress={handler}>
         Sign up
       </Button>
       <Modal
@@ -166,10 +166,10 @@ function SignUp() {
           </Row>
         </Modal.Body>
         <Modal.Footer>
-          <Button auto flat color="error" onClick={closeHandler}>
+          <Button auto flat color="error" onPress={closeHandler}>
             Close
           </Button>
-          <Button auto onClick={closeHandler}>
+          <Button auto onPress={closeHandler}>
             Sign Up
           </Button>
         </Modal.Footer>

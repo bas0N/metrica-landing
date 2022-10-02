@@ -26,20 +26,18 @@ import Links from "../../components/form/PersonalLinks";
 import PersonalLinks from "../../components/form/PersonalLinks";
 import { SelectProps } from "../../components/input/Select";
 function index() {
-  const { setTheme } = useNextTheme();
-  const { isDark, type } = useTheme();
-
+  // const { setTheme } = useNextTheme();
+  // const { isDark, type } = useTheme();
+  // <Switch
+  //   color="success"
+  //   checked={isDark}
+  //   onChange={(e) => setTheme(e.target.checked ? "dark" : "light")}
+  // />;
   return (
     <Container>
       <div className=" flex flex-col">
         <div className="flex justify-between items-center">
           <h1 className="text-8xl font-bold">FORM</h1>
-
-          <Switch
-            color="success"
-            checked={isDark}
-            onChange={(e) => setTheme(e.target.checked ? "dark" : "light")}
-          />
         </div>
         <h3>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

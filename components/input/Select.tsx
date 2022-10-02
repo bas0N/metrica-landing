@@ -21,8 +21,10 @@ function Select({ command, options }: SelectProps) {
         }`}
       >
         <option value="DEFAULT">{command}</option>
-        {options.map((option) => (
-          <option value={option.value}>{option.desc}</option>
+        {options.map((option, index) => (
+          <option value={option.value} key={index}>
+            {option.desc}
+          </option>
         ))}
       </select>
     </div>

@@ -9,9 +9,13 @@ import {
   Spacer,
   Text,
   Link,
+  FormElement,
+  useInput,
 } from "@nextui-org/react";
 import { AiOutlineMail } from "react-icons/ai";
 import { RiLockPasswordLine } from "react-icons/ri";
+import { useState, useEffect } from "react";
+import { ChangeEvent } from "react";
 
 function SignIn() {
   const [visible, setVisible] = React.useState(false);
@@ -19,6 +23,17 @@ function SignIn() {
   const closeHandler = () => {
     setVisible(false);
     console.log("closed");
+  };
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleEmailChange = (e: ChangeEvent<FormElement>) => {
+    setEmail(e.target.value);
+    console.log(email);
+  };
+  const handlePasswordChange = (e: ChangeEvent<FormElement>) => {
+    setPassword(e.target.value);
+    console.log(password);
   };
   return (
     <div>
@@ -28,7 +43,7 @@ function SignIn() {
         flat
         as={Link}
         auto
-        onClick={handler}
+        onPress={handler}
       >
         Sign in
       </Button>
@@ -53,6 +68,8 @@ function SignIn() {
             color="success"
             size="lg"
             placeholder="Email"
+            aria-label="login"
+            onChange={handleEmailChange}
             contentLeft={<AiOutlineMail fill="currentColor" />}
           />
           <Input.Password
@@ -61,6 +78,7 @@ function SignIn() {
             fullWidth
             color="success"
             size="lg"
+            onChange={handlePasswordChange}
             placeholder="Password"
             contentLeft={<RiLockPasswordLine fill="currentColor" />}
           />
@@ -72,10 +90,10 @@ function SignIn() {
           </Row>
         </Modal.Body>
         <Modal.Footer>
-          <Button auto flat color="error" onClick={closeHandler}>
+          <Button auto flat color="error" onPress={closeHandler}>
             Close
           </Button>
-          <Button auto onClick={closeHandler}>
+          <Button auto onPress={closeHandler}>
             Sign in
           </Button>
         </Modal.Footer>
