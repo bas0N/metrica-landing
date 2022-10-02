@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
+import { authService } from "./authService";
+import { RegisterUserDto } from "./dto/registerUser.dto";
 const initialState = {
   user: "Brad",
   isError: false,
@@ -10,8 +11,14 @@ const initialState = {
 //register new user
 export const register = createAsyncThunk(
   "auth/register",
-  async (user: any, thunkAPI) => {
-    console.log(user);
+  async (user: RegisterUserDto, thunkAPI) => {
+    try {
+      console.log("auth slice");
+      return await authService.register(user);
+    } catch (err) {
+      const message = err.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
   }
 );
 //login user

@@ -20,6 +20,7 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { register } from "../../features/auth/authSlice";
 import { AppDispatch } from "../../app/store";
+import { RegisterUserDto } from "../../features/auth/dto/registerUser.dto";
 function SignUp() {
   const dispatch = useDispatch<AppDispatch>();
   const { user, isLoading, isSuccess, message } = useSelector(
@@ -128,7 +129,7 @@ function SignUp() {
   };
   const handleSignUp = () => {
     if (email.valid && password.valid && passwordRepeat.valid) {
-      const userData = {
+      const userData: RegisterUserDto = {
         email: email.value,
         password: password.value,
       };
