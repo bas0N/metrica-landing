@@ -133,6 +133,8 @@ function SignUp() {
         password: password.value,
       };
       dispatch(register(userData));
+    } else {
+      console.log("invalid data");
     }
   };
   return (

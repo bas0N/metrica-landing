@@ -16,24 +16,45 @@ import { AiOutlineMail } from "react-icons/ai";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { useState, useEffect } from "react";
 import { ChangeEvent } from "react";
-
+import { useSelector, useDispatch } from "react-redux";
+import { register } from "../../features/auth/authSlice";
+import { AppDispatch } from "../../app/store";
+import { validateEmail } from "../../utils/validateEmail";
 function SignIn() {
+  const dispatch = useDispatch<AppDispatch>();
   const [visible, setVisible] = React.useState(false);
   const handler = () => setVisible(true);
   const closeHandler = () => {
     setVisible(false);
     console.log("closed");
   };
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState({ isValid: false, value: "" });
+  const [password, setPassword] = useState({ isValid: false, value: "" });
 
   const handleEmailChange = (e: ChangeEvent<FormElement>) => {
-    setEmail(e.target.value);
-    console.log(email);
+    if (validateEmail(e.target.value)) {
+      setEmail({ isValid: true, value: e.target.value });
+    } else {
+      setEmail({ isValid: false, value: e.target.value });
+    }
   };
   const handlePasswordChange = (e: ChangeEvent<FormElement>) => {
-    setPassword(e.target.value);
-    console.log(password);
+    if (e.target.value.length < 7) {
+      setPassword({ isValid: false, value: e.target.value });
+    } else {
+      setPassword({ isValid: true, value: e.target.value });
+    }
+  };
+  const handleLogin = () => {
+    if (email.isValid && password.isValid) {
+      const userData = {
+        email: email.value,
+        password: password.value,
+      };
+      dispatch(register(userData));
+    } else {
+      console.log("invalid data");
+    }
   };
   return (
     <div>
@@ -93,7 +114,7 @@ function SignIn() {
           <Button auto flat color="error" onPress={closeHandler}>
             Close
           </Button>
-          <Button auto onPress={closeHandler}>
+          <Button auto onPress={handleLogin}>
             Sign in
           </Button>
         </Modal.Footer>
