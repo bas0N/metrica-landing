@@ -17,8 +17,15 @@ import { AiOutlineMail } from "react-icons/ai";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { ChangeEvent } from "react";
 import { useEffect } from "react";
-
+import { useSelector, useDispatch } from "react-redux";
+import { register } from "../../features/auth/authSlice";
+import { AppDispatch } from "../../app/store";
 function SignUp() {
+  const dispatch = useDispatch<AppDispatch>();
+  const { user, isLoading, isSuccess, message } = useSelector(
+    (state: any) => state.auth
+  );
+
   const [selected2, setSelected2] = useState<any>(new Set(["text"]));
 
   const selectedValue2 = React.useMemo(
@@ -119,6 +126,15 @@ function SignUp() {
     }
     return false;
   };
+  const handleSignUp = () => {
+    if (email.valid && password.valid && passwordRepeat.valid) {
+      const userData = {
+        email: email.value,
+        password: password.value,
+      };
+      dispatch(register(userData));
+    }
+  };
   return (
     <div>
       <Button light color="success" flat as={Link} auto onPress={handler}>
@@ -140,6 +156,7 @@ function SignUp() {
           </Text>
         </Modal.Header>
         <Modal.Body>
+          {user}
           <Input
             clearable
             bordered
@@ -177,7 +194,7 @@ function SignUp() {
           <Button auto flat color="error" onPress={closeHandler}>
             Close
           </Button>
-          <Button auto onPress={closeHandler}>
+          <Button auto onPress={handleSignUp}>
             Sign Up
           </Button>
         </Modal.Footer>
