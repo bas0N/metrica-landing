@@ -9,17 +9,70 @@ import {
   Spacer,
   Text,
   Link,
+  FormElement,
+  useInput,
 } from "@nextui-org/react";
 import { AiOutlineMail } from "react-icons/ai";
 import { RiLockPasswordLine } from "react-icons/ri";
+import { useState, useEffect } from "react";
+import { ChangeEvent } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { login, reset } from "../../features/auth/authSlice";
+import { AppDispatch } from "../../app/store";
+import { validateEmail } from "../../utils/validateEmail";
+import { useRouter } from "next/router";
 
 function SignIn() {
+  const router = useRouter();
+  const dispatch = useDispatch<AppDispatch>();
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state: any) => state.auth
+  );
   const [visible, setVisible] = React.useState(false);
   const handler = () => setVisible(true);
   const closeHandler = () => {
     setVisible(false);
     console.log("closed");
   };
+  const [email, setEmail] = useState({ isValid: false, value: "" });
+  const [password, setPassword] = useState({ isValid: false, value: "" });
+
+  const handleEmailChange = (e: ChangeEvent<FormElement>) => {
+    if (validateEmail(e.target.value)) {
+      setEmail({ isValid: true, value: e.target.value });
+    } else {
+      setEmail({ isValid: false, value: e.target.value });
+    }
+  };
+  const handlePasswordChange = (e: ChangeEvent<FormElement>) => {
+    if (e.target.value.length < 7) {
+      setPassword({ isValid: false, value: e.target.value });
+    } else {
+      setPassword({ isValid: true, value: e.target.value });
+    }
+  };
+  const handleLogin = () => {
+    if (email.isValid && password.isValid) {
+      const userData = {
+        email: email.value,
+        password: password.value,
+      };
+      dispatch(login(userData));
+    } else {
+      console.log("invalid data");
+    }
+  };
+  useEffect(() => {
+    if (isError) {
+      alert("błąd!!");
+    }
+    if (isSuccess || user) {
+      //redirect
+      //close signup modal and open sign in modal
+      router.push("/dashboard");
+    }
+    dispatch(reset());
+  }, [user, isLoading, isError, isSuccess, message, router, dispatch]);
   return (
     <div>
       <Button
@@ -28,7 +81,7 @@ function SignIn() {
         flat
         as={Link}
         auto
-        onClick={handler}
+        onPress={handler}
       >
         Sign in
       </Button>
@@ -53,6 +106,8 @@ function SignIn() {
             color="success"
             size="lg"
             placeholder="Email"
+            aria-label="login"
+            onChange={handleEmailChange}
             contentLeft={<AiOutlineMail fill="currentColor" />}
           />
           <Input.Password
@@ -61,6 +116,7 @@ function SignIn() {
             fullWidth
             color="success"
             size="lg"
+            onChange={handlePasswordChange}
             placeholder="Password"
             contentLeft={<RiLockPasswordLine fill="currentColor" />}
           />
@@ -72,10 +128,10 @@ function SignIn() {
           </Row>
         </Modal.Body>
         <Modal.Footer>
-          <Button auto flat color="error" onClick={closeHandler}>
+          <Button auto flat color="error" onPress={closeHandler}>
             Close
           </Button>
-          <Button auto onClick={closeHandler}>
+          <Button auto onPress={handleLogin}>
             Sign in
           </Button>
         </Modal.Footer>
