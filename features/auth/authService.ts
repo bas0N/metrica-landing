@@ -6,12 +6,13 @@ export const register = async (user: RegisterUserDto) => {
   console.log(user);
   console.log("auth service -> register");
   const response = await axios.post(
-    "http://localhost:3000/auth/register",
+    "http://localhost:3001/auth/register",
     user
   );
-  console.log("response axios:");
-  console.log(response.status);
-  console.log(response.data);
+  if (response.data) {
+    localStorage.setItem("user", JSON.stringify(response.data));
+  }
+  return response.data;
 };
 
 export const authService = { register };

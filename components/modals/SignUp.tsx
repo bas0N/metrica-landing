@@ -74,12 +74,14 @@ function SignUp() {
     }
     setProgress((progressScore / 3) * 100);
   }, [email.valid, password.valid, passwordRepeat.valid]);
+  //redux
   useEffect(() => {
     if (isError) {
       alert("błąd!!");
     }
     if (isSuccess || user) {
       //redirect
+      //close signup modal and open sign in modal
       alert("success!, redirect");
     }
     dispatch(reset());

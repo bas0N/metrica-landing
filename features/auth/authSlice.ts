@@ -2,8 +2,10 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { authService } from "./authService";
 import { RegisterUserDto } from "./dto/registerUser.dto";
 import { useEffect } from "react";
+
+const user = localStorage.getItem("user");
 const initialState = {
-  user: "",
+  user: user ? user : "",
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -48,7 +50,7 @@ export const authSlice = createSlice({
       .addCase(register.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.user = action.payload!;
+        state.user = JSON.stringify(action.payload!);
       })
       .addCase(register.rejected, (state, action) => {
         state.isLoading = false;
