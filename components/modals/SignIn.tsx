@@ -17,11 +17,17 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import { useState, useEffect } from "react";
 import { ChangeEvent } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { register } from "../../features/auth/authSlice";
+import { login, reset } from "../../features/auth/authSlice";
 import { AppDispatch } from "../../app/store";
 import { validateEmail } from "../../utils/validateEmail";
+import { useRouter } from "next/router";
+
 function SignIn() {
+  const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state: any) => state.auth
+  );
   const [visible, setVisible] = React.useState(false);
   const handler = () => setVisible(true);
   const closeHandler = () => {
@@ -51,11 +57,22 @@ function SignIn() {
         email: email.value,
         password: password.value,
       };
-      dispatch(register(userData));
+      dispatch(login(userData));
     } else {
       console.log("invalid data");
     }
   };
+  useEffect(() => {
+    if (isError) {
+      alert("błąd!!");
+    }
+    if (isSuccess || user) {
+      //redirect
+      //close signup modal and open sign in modal
+      router.push("/dashboard");
+    }
+    dispatch(reset());
+  }, [user, isLoading, isError, isSuccess, message, router, dispatch]);
   return (
     <div>
       <Button

@@ -2,8 +2,10 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { authService } from "./authService";
 import { RegisterUserDto } from "./dto/registerUser.dto";
 import { useEffect } from "react";
+import { LoginUserDto } from "./dto/loginUser.dto";
 const ISSERVER = typeof window === "undefined";
 
+//next js ssr issue
 let user;
 if (!ISSERVER) {
   user = localStorage.getItem("user");
@@ -31,8 +33,14 @@ export const register = createAsyncThunk(
 //login user
 export const login = createAsyncThunk(
   "auth/login",
-  async (user: any, thunkAPI) => {
-    console.log(user);
+  async (user: LoginUserDto, thunkAPI) => {
+    try {
+      console.log("auth slice");
+      return await authService.login(user);
+    } catch (err) {
+      const message: string = err.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
   }
 );
 export const logout = createAsyncThunk("auth/logout", async () => {
@@ -60,6 +68,21 @@ export const authSlice = createSlice({
         state.user = JSON.stringify(action.payload!);
       })
       .addCase(register.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload as string;
+
+        state.user = "";
+      })
+      .addCase(login.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(login.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.user = JSON.stringify(action.payload!);
+      })
+      .addCase(login.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload as string;

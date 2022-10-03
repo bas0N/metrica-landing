@@ -19,10 +19,11 @@ import { ChangeEvent } from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { register, reset } from "../../features/auth/authSlice";
-
+import { useRouter } from "next/router";
 import { AppDispatch } from "../../app/store";
 import { RegisterUserDto } from "../../features/auth/dto/registerUser.dto";
 function SignUp() {
+  const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
   const { user, isLoading, isError, isSuccess, message } = useSelector(
     (state: any) => state.auth
@@ -82,7 +83,7 @@ function SignUp() {
     if (isSuccess || user) {
       //redirect
       //close signup modal and open sign in modal
-      alert("success!, redirect");
+      router.push("/dashboard");
     }
     dispatch(reset());
   }, [user, isLoading, isError, isSuccess, message]);

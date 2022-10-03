@@ -12,7 +12,7 @@ import {
   useTheme,
 } from "@nextui-org/react";
 import { useSelector, useDispatch } from "react-redux";
-import { logout, reset } from "../../features/auth/authSlice";
+import { logout, reset, login } from "../../features/auth/authSlice";
 import { Link as UiLink } from "@nextui-org/react";
 import { useTheme as useNextTheme } from "next-themes";
 import { useRouter } from "next/router";
@@ -50,6 +50,7 @@ function NavbarComponent() {
     dispatch(reset());
     router.push("/");
   };
+
   return (
     <Navbar isBordered variant="sticky">
       <Navbar.Toggle showIn="xs" />
