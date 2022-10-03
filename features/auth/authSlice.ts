@@ -2,8 +2,12 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { authService } from "./authService";
 import { RegisterUserDto } from "./dto/registerUser.dto";
 import { useEffect } from "react";
+const ISSERVER = typeof window === "undefined";
 
-const user = localStorage.getItem("user");
+let user;
+if (!ISSERVER) {
+  user = localStorage.getItem("user");
+}
 const initialState = {
   user: user ? user : "",
   isError: false,
@@ -31,6 +35,9 @@ export const login = createAsyncThunk(
     console.log(user);
   }
 );
+export const logout = createAsyncThunk("auth/logout", async () => {
+  await authService.logout();
+});
 export const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -57,6 +64,9 @@ export const authSlice = createSlice({
         state.isError = true;
         state.message = action.payload as string;
 
+        state.user = "";
+      })
+      .addCase(logout.fulfilled, (state) => {
         state.user = "";
       });
   },

@@ -1,5 +1,6 @@
 import { RegisterUserDto } from "./dto/registerUser.dto";
 import axios from "axios";
+import { LoginUserDto } from "./dto/loginUser.dto";
 const API_URL = "";
 
 export const register = async (user: RegisterUserDto) => {
@@ -14,5 +15,8 @@ export const register = async (user: RegisterUserDto) => {
   }
   return response.data;
 };
+export const logout = () => {
+  localStorage.removeItem("user");
+};
 
-export const authService = { register };
+export const authService = { register, logout };

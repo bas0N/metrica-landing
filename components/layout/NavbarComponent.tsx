@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Logo } from "../../assets/Logo";
 import {
   Navbar,
@@ -11,13 +11,24 @@ import {
   Switch,
   useTheme,
 } from "@nextui-org/react";
+import { useSelector, useDispatch } from "react-redux";
+import { logout, reset } from "../../features/auth/authSlice";
 import { Link as UiLink } from "@nextui-org/react";
 import { useTheme as useNextTheme } from "next-themes";
 import { useRouter } from "next/router";
 import SignIn from "../modals/SignIn";
 import SignUp from "../modals/SignUp";
 import Link from "next/link";
+import { AppDispatch } from "../../app/store";
+import { useEffect } from "react";
 function NavbarComponent() {
+  const dispatch = useDispatch<AppDispatch>();
+  const [userState, setUserState] = useState("");
+  const { user } = useSelector((state: any) => state.auth);
+
+  useEffect(() => {
+    setUserState(user);
+  }, [user]);
   const router = useRouter();
 
   const { setTheme } = useNextTheme();
@@ -34,6 +45,11 @@ function NavbarComponent() {
     "Help & Feedback",
     "Log Out",
   ];
+  const onLogout = () => {
+    dispatch(logout());
+    dispatch(reset());
+    router.push("/");
+  };
   return (
     <Navbar isBordered variant="sticky">
       <Navbar.Toggle showIn="xs" />
@@ -84,10 +100,21 @@ function NavbarComponent() {
             checked={isDark}
             onChange={(e) => setTheme(e.target.checked ? "dark" : "light")}
           />
-          <SignIn />
-          <Navbar.Item>
-            <SignUp />
-          </Navbar.Item>
+          {userState ? (
+            <Button onClick={onLogout} bordered color="success" auto>
+              Logout
+            </Button>
+          ) : (
+            <>
+              <Navbar.Item>
+                <SignIn />
+              </Navbar.Item>
+
+              <Navbar.Item>
+                <SignUp />
+              </Navbar.Item>
+            </>
+          )}
         </Navbar.Content>
       </Navbar.Content>
       <Navbar.Collapse disableAnimation>
