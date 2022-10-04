@@ -1,29 +1,58 @@
-import React from "react";
+import React, { MouseEventHandler, useState } from "react";
 import HistoryTable from "../../components/dashboard/HistoryTable";
 import Link from "next/link";
+import { Button } from "@nextui-org/react";
+import { useRouter } from "next/router";
+
 type Props = {
   children: React.ReactNode;
 };
 function DashboardLayout({ children }: Props) {
+  const [chosen, setChosen] = useState(0);
+  const router = useRouter();
+
   return (
     <div className="grid grid-cols-5 h-screen">
-      <div className="bg-neutral-900   flex flex-col">
-        <Link href="/dashboard/">
-          <div className="cursor-pointer bg-gray-500 hover:bg-gray-700  px-2 py-4 rounded-lg">
+      <div className="bg-inherit shadow-2xl border-black  flex flex-col">
+        <Button.Group
+          size="xl"
+          vertical
+          className="bg-green-400 text-inherit p-0 m-0 rounded-t-none"
+        >
+          <Button
+            className={`text-black border-0 hover:bg-green-500 ${
+              chosen === 1 ? "bg-green-500" : ""
+            }`}
+            onPress={() => {
+              router.push("/dashboard");
+              setChosen(1);
+            }}
+          >
             Manage Forms
-          </div>
-        </Link>
-
-        <Link href="/dashboard/send-form">
-          <div className="cursor-pointer bg-gray-500 hover:bg-gray-700 px-2 py-4 rounded-lg">
+          </Button>
+          <Button
+            className={`text-black border-0 hover:bg-green-500 ${
+              chosen === 2 ? "bg-green-500" : ""
+            }`}
+            onPress={() => {
+              router.push("/dashboard/send-form");
+              setChosen(2);
+            }}
+          >
             Send Form
-          </div>
-        </Link>
-        <Link href="/dashboard/manage-recruitments">
-          <div className="cursor-pointer bg-gray-500 hover:bg-gray-700 px-2 py-4 rounded-lg ">
+          </Button>
+          <Button
+            className={`text-black border-0 hover:bg-green-500 ${
+              chosen === 3 ? "bg-green-500" : ""
+            }`}
+            onPress={() => {
+              router.push("/dashboard/manage-recruitments");
+              setChosen(3);
+            }}
+          >
             Manage Recruitments
-          </div>
-        </Link>
+          </Button>
+        </Button.Group>
       </div>
       <div className="col-span-4  flex flex-col justify-around">{children}</div>
     </div>
