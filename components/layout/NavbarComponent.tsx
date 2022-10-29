@@ -108,7 +108,24 @@ function NavbarComponent() {
           ) : (
             <>
               <Navbar.Item>
-                <SignIn />
+                {/*  <SignIn /> */}
+                <Button
+                  onClick={() => {
+                    router.push("/api/auth/login");
+                  }}
+                >
+                  Sign In
+                </Button>
+              </Navbar.Item>
+              <Navbar.Item>
+                {/*  <SignIn /> */}
+                <Button
+                  onClick={() => {
+                    router.push("/api/auth/logout");
+                  }}
+                >
+                  Logout
+                </Button>
               </Navbar.Item>
 
               <Navbar.Item>
