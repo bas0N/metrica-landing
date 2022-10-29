@@ -8,7 +8,6 @@ function Hero() {
   return (
     <div className="flex flex-col items-center justify-center  translate-y-40 h-full mb-96">
       <div className=" flex flex-col items-center">
-        <h1>{user ? user.name : "no user found"}</h1>
         <Text
           h1
           className="text-8xl lg:text-[12rem]"
