@@ -56,7 +56,7 @@ function NavbarComponent() {
       <Navbar.Toggle showIn="xs" />
       <Link href="/">
         <Navbar.Brand
-          className="cursor-pointer"
+          className="cursor-pointer flex items-center"
           css={{
             "@xs": {
               w: "12%",
@@ -64,7 +64,7 @@ function NavbarComponent() {
           }}
         >
           <Logo />
-          <Text className="cursor-pointer" b color="inherit" hideIn="xs">
+          <Text className="cursor-pointer ml-3" b color="inherit" hideIn="xs">
             STACK METRICS
           </Text>
         </Navbar.Brand>
