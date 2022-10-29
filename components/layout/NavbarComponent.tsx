@@ -56,7 +56,7 @@ function NavbarComponent() {
       <Navbar.Toggle showIn="xs" />
       <Link href="/">
         <Navbar.Brand
-          className="cursor-pointer"
+          className="cursor-pointer flex items-center"
           css={{
             "@xs": {
               w: "12%",
@@ -64,7 +64,7 @@ function NavbarComponent() {
           }}
         >
           <Logo />
-          <Text className="cursor-pointer" b color="inherit" hideIn="xs">
+          <Text className="cursor-pointer ml-3" b color="inherit" hideIn="xs">
             STACK METRICS
           </Text>
         </Navbar.Brand>
@@ -108,7 +108,24 @@ function NavbarComponent() {
           ) : (
             <>
               <Navbar.Item>
-                <SignIn />
+                {/*  <SignIn /> */}
+                <Button
+                  onClick={() => {
+                    router.push("/api/auth/login");
+                  }}
+                >
+                  Sign In
+                </Button>
+              </Navbar.Item>
+              <Navbar.Item>
+                {/*  <SignIn /> */}
+                <Button
+                  onClick={() => {
+                    router.push("/api/auth/logout");
+                  }}
+                >
+                  Logout
+                </Button>
               </Navbar.Item>
 
               <Navbar.Item>

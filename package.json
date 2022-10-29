@@ -13,6 +13,7 @@
     "../@types"
   ],
   "dependencies": {
+    "@auth0/nextjs-auth0": "^1.9.2",
     "@nextui-org/react": "^1.0.0-beta.10",
     "@reduxjs/toolkit": "^1.8.5",
     "axios": "^0.27.2",

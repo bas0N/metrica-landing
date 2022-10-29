@@ -50,7 +50,7 @@ function Footer() {
         >
           <div className="flex items-center">
             <Logo />
-            <h1>SCRIP MET</h1>
+            <h1>Stack Metrics</h1>
           </div>
           <div className="flex flex-col">
             <h2>ul. Czyżewska 116</h2>

@@ -1,7 +1,10 @@
 import { Button, Text } from "@nextui-org/react";
 import React from "react";
+import { useUser } from "@auth0/nextjs-auth0";
 
 function Hero() {
+  const { user, error, isLoading } = useUser();
+
   return (
     <div className="flex flex-col items-center justify-center  translate-y-40 h-full mb-96">
       <div className=" flex flex-col items-center">

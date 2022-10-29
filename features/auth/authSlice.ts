@@ -25,8 +25,8 @@ export const register = createAsyncThunk(
       console.log("auth slice");
       return await authService.register(user);
     } catch (err) {
-      const message: string = err.toString();
-      return thunkAPI.rejectWithValue(message);
+      // const message: string = err.toString();
+      return thunkAPI.rejectWithValue(err);
     }
   }
 );
@@ -38,8 +38,8 @@ export const login = createAsyncThunk(
       console.log("auth slice");
       return await authService.login(user);
     } catch (err) {
-      const message: string = err.toString();
-      return thunkAPI.rejectWithValue(message);
+      //const message: string = err.toString();
+      return thunkAPI.rejectWithValue(err);
     }
   }
 );
