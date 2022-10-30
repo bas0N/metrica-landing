@@ -50,6 +50,13 @@ function NavbarComponent() {
     dispatch(reset());
     router.push("/");
   };
+  useEffect(() => {
+    fetch("/api/auth/getAccessToken")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+  }, []);
 
   return (
     <Navbar isBordered variant="sticky">
