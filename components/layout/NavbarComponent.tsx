@@ -21,13 +21,19 @@ import SignUp from "../modals/SignUp";
 import Link from "next/link";
 import { AppDispatch } from "../../app/store";
 import { useEffect } from "react";
+import { useUser } from "@auth0/nextjs-auth0";
+
 function NavbarComponent() {
   const dispatch = useDispatch<AppDispatch>();
-  const [userState, setUserState] = useState("");
-  const { user } = useSelector((state: any) => state.auth);
+  const [userState, setUserState] = useState({});
+  //const { user } = useSelector((state: any) => state.auth);
+  const { user, error, isLoading } = useUser();
 
   useEffect(() => {
-    setUserState(user);
+    console.log(user);
+    if (user) {
+      setUserState(user);
+    }
   }, [user]);
   const router = useRouter();
 
@@ -48,15 +54,17 @@ function NavbarComponent() {
   const onLogout = () => {
     dispatch(logout());
     dispatch(reset());
-    router.push("/");
+    setUserState(false);
+    router.push("/api/auth/logout");
   };
-  useEffect(() => {
-    fetch("/api/auth/getAccessToken")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch("/api/auth/getAccessToken")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //     });
+  //   console.log(user);
+  // }, []);
 
   return (
     <Navbar isBordered variant="sticky">
@@ -108,35 +116,66 @@ function NavbarComponent() {
             checked={isDark}
             onChange={(e) => setTheme(e.target.checked ? "dark" : "light")}
           />
-          {userState ? (
-            <Button onClick={onLogout} bordered color="success" auto>
-              Logout
-            </Button>
+          {user ? (
+            <Dropdown placement="bottom-right">
+              <Navbar.Item>
+                <Dropdown.Trigger>
+                  <Avatar
+                    bordered
+                    as="button"
+                    color="primary"
+                    size="md"
+                    src={user.picture!}
+                  />
+                </Dropdown.Trigger>
+              </Navbar.Item>
+              <Dropdown.Menu
+                aria-label="User menu actions"
+                color="secondary"
+                onAction={(actionKey) => console.log({ actionKey })}
+              >
+                <Dropdown.Item key="profile" css={{ height: "$18" }}>
+                  <Text b color="inherit" css={{ d: "flex" }}>
+                    Signed in as
+                  </Text>
+                  <Text b color="inherit" css={{ d: "flex" }}>
+                    {user.email}
+                  </Text>
+                </Dropdown.Item>
+                <Dropdown.Item key="settings" withDivider>
+                  My Settings
+                </Dropdown.Item>
+                <Dropdown.Item key="team_settings">Team Settings</Dropdown.Item>
+                <Dropdown.Item key="analytics" withDivider>
+                  Analytics
+                </Dropdown.Item>
+                <Dropdown.Item key="system">System</Dropdown.Item>
+                <Dropdown.Item key="configurations">
+                  Configurations
+                </Dropdown.Item>
+                <Dropdown.Item key="help_and_feedback" withDivider>
+                  Help & Feedback
+                </Dropdown.Item>
+                <Dropdown.Item key="logout" withDivider color="error">
+                  <div onClick={onLogout}>Log Out</div>
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
           ) : (
             <>
               <Navbar.Item>
                 {/*  <SignIn /> */}
                 <Button
+                  light
+                  bordered
+                  size="sm"
+                  color="success"
                   onClick={() => {
                     router.push("/api/auth/login");
                   }}
                 >
                   Sign In
                 </Button>
-              </Navbar.Item>
-              <Navbar.Item>
-                {/*  <SignIn /> */}
-                <Button
-                  onClick={() => {
-                    router.push("/api/auth/logout");
-                  }}
-                >
-                  Logout
-                </Button>
-              </Navbar.Item>
-
-              <Navbar.Item>
-                <SignUp />
               </Navbar.Item>
             </>
           )}
