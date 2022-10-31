@@ -5,18 +5,28 @@ import HistoryTable from "../../components/dashboard/HistoryTable";
 import DashboardLayout from "../../components/layout/DashboardLayout";
 
 function index() {
-  const { user, error, isLoading } = useUser();
   const router = useRouter();
-  useEffect(() => {
-    if (!user) {
-      router.replace("/");
-    }
-  }, [user]);
-  return (
-    <div className="">
-      <HistoryTable />
-    </div>
-  );
+  const { user, error, isLoading } = useUser();
+
+  // useEffect(() => {
+  //   console.log(user);
+
+  //   if (!user) {
+  //     console.log("USER DOES NIT EXIST");
+  //     router.replace("/");
+  //   }
+  // }, []);
+  if (isLoading) {
+    return <div></div>;
+  } else if (user) {
+    return (
+      <div className="">
+        <HistoryTable />
+      </div>
+    );
+  } else if (!user) {
+    router.replace("/");
+  }
 }
 
 index.PageLayout = DashboardLayout;

@@ -5,9 +5,9 @@ export default handleAuth({
   async login(req, res) {
     try {
       await handleLogin(req, res, {
+        returnTo: "/dashboard",
         authorizationParams: {
           audience: process.env.AUTH0_AUDIENCE, // or AUTH0_AUDIENCE
-          // Add the `offline_access` scope to also get a Refresh Token
         },
       });
     } catch (error) {
