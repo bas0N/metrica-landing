@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Table,
   Row,
@@ -16,7 +16,17 @@ import { EyeIcon } from "../../components/table/EyeIcon";
 import { EditIcon } from "../../components/table/EditIcon";
 import { DeleteIcon } from "../../components/table/DeleteIcon";
 import { AnyARecord } from "dns";
+import { useUser } from "@auth0/nextjs-auth0";
+import Router, { useRouter } from "next/router";
+
 function history() {
+  const { user, error, isLoading } = useUser();
+  const router = useRouter();
+  useEffect(() => {
+    if (!user) {
+      router.replace("/");
+    }
+  }, [user]);
   const columns = [
     { name: "NAME", uid: "name" },
     { name: "ROLE", uid: "role" },
@@ -188,6 +198,5 @@ function history() {
     </div>
   );
 }
-history;
 
 export default history;

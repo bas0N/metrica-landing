@@ -6,7 +6,7 @@ function Hero() {
   const { user, error, isLoading } = useUser();
   //const { accessToken } = await getAccessToken(req, res);
 
-  console.log(user);
+  //console.log(user);
   //console.log("token", accessToken);
   return (
     <div className="flex flex-col items-center justify-center  translate-y-40 h-full mb-96">
