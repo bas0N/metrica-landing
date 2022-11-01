@@ -146,57 +146,64 @@ function history() {
         return cellValue;
     }
   };
-  return (
-    <div className="flex flex-col">
-      <Table
-        aria-label="Example table with custom cells"
-        css={{
-          height: "auto",
-          minWidth: "100%",
-        }}
-        selectionMode="none"
-      >
-        <Table.Header columns={columns}>
-          {(column) => (
-            <Table.Column
-              key={column.uid}
-              hideHeader={column.uid === "actions"}
-              align={column.uid === "actions" ? "center" : "start"}
-            >
-              {column.name}
-            </Table.Column>
-          )}
-        </Table.Header>
-        <Table.Body items={users}>
-          {(item) => (
-            <Table.Row>
-              {(columnKey) => (
-                <Table.Cell>{renderCell(item, columnKey)}</Table.Cell>
-              )}
-            </Table.Row>
-          )}
-        </Table.Body>
-      </Table>
 
-      <div className="flex justify-end mt-3">
-        <Button className="bg-green-500 mx-1 hover:bg-green-600">
-          Action1
-        </Button>
-        <Button className="bg-green-500 mx-1 hover:bg-green-600">
-          Action2
-        </Button>
-        <Button className="bg-green-500 mx-1 hover:bg-green-600">
-          Action3
-        </Button>
+  if (isLoading) {
+    return <div></div>;
+  } else if (user) {
+    return (
+      <div className="flex flex-col">
+        <Table
+          aria-label="Example table with custom cells"
+          css={{
+            height: "auto",
+            minWidth: "100%",
+          }}
+          selectionMode="none"
+        >
+          <Table.Header columns={columns}>
+            {(column) => (
+              <Table.Column
+                key={column.uid}
+                hideHeader={column.uid === "actions"}
+                align={column.uid === "actions" ? "center" : "start"}
+              >
+                {column.name}
+              </Table.Column>
+            )}
+          </Table.Header>
+          <Table.Body items={users}>
+            {(item) => (
+              <Table.Row>
+                {(columnKey) => (
+                  <Table.Cell>{renderCell(item, columnKey)}</Table.Cell>
+                )}
+              </Table.Row>
+            )}
+          </Table.Body>
+        </Table>
+
+        <div className="flex justify-end mt-3">
+          <Button className="bg-green-500 mx-1 hover:bg-green-600">
+            Action1
+          </Button>
+          <Button className="bg-green-500 mx-1 hover:bg-green-600">
+            Action2
+          </Button>
+          <Button className="bg-green-500 mx-1 hover:bg-green-600">
+            Action3
+          </Button>
+        </div>
+        <Pagination
+          className="self-center mt-6"
+          shadow
+          color="success"
+          total={10}
+        />
       </div>
-      <Pagination
-        className="self-center mt-6"
-        shadow
-        color="success"
-        total={10}
-      />
-    </div>
-  );
+    );
+  } else if (!user) {
+    router.replace("/");
+  }
 }
 
 export default history;

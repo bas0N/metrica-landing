@@ -11,7 +11,13 @@ function SendForm() {
       router.replace("/");
     }
   }, [user]);
-  return <div>sendForm</div>;
+  if (isLoading) {
+    return <div></div>;
+  } else if (user) {
+    return <div>sendForm</div>;
+  } else if (!user) {
+    router.replace("/");
+  }
 }
 SendForm.PageLayout = DashboardLayout;
 export default SendForm;

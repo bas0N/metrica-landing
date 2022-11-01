@@ -11,7 +11,13 @@ function ManageRecruitments() {
       router.replace("/");
     }
   }, [user]);
-  return <div>manage recruitments</div>;
+  if (isLoading) {
+    return <div></div>;
+  } else if (user) {
+    return <div>manage recruitments</div>;
+  } else if (!user) {
+    router.replace("/");
+  }
 }
 ManageRecruitments.PageLayout = DashboardLayout;
 export default ManageRecruitments;
