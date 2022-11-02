@@ -5,7 +5,7 @@ function index() {
   return (
     <div className="flex flex-col  ">
       <Text className="text-7xl  mt-10">How does it work?</Text>
-      <div className="flex flex-col  mt-12 mx-auto gap-8">
+      <div className="flex flex-col  mt-20 mx-auto gap-8">
         <div className="flex gap-10">
           <Card css={{ w: "50%", h: "300px" }}>
             <Card.Header css={{ position: "absolute", zIndex: 1, top: 5 }}>
@@ -76,7 +76,7 @@ function index() {
             </Text>
           </div>
         </div>
-        <div className="flex gap-10">
+        <div className="flex gap-10 mt-20">
           <div className="flex flex-col  w-1/2">
             <Text className="text-5xl font-bold"> Tell us what you need</Text>
 
@@ -150,7 +150,7 @@ function index() {
           </Card>
         </div>
 
-        <div className="mx-auto">
+        <div className="mx-auto mt-12">
           <iframe
             width="853"
             height="480"
@@ -161,7 +161,7 @@ function index() {
             title="Embedded youtube"
           />
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col my-12 ">
           <Text className="text-5xl font-bold mb-12">
             Tell us what you need
           </Text>
