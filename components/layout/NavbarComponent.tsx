@@ -22,6 +22,7 @@ import Link from "next/link";
 import { AppDispatch } from "../../app/store";
 import { useEffect } from "react";
 import { useUser } from "@auth0/nextjs-auth0";
+import { GetServerSidePropsContext } from "next";
 
 function NavbarComponent() {
   const dispatch = useDispatch<AppDispatch>();
@@ -31,10 +32,14 @@ function NavbarComponent() {
 
   useEffect(() => {
     console.log(user);
+    if (error) {
+      console.log("error in navbar");
+      router.replace("/");
+    }
     if (user) {
       setUserState(user);
     }
-  }, [user]);
+  }, [user, error]);
   const router = useRouter();
 
   const { setTheme } = useNextTheme();
