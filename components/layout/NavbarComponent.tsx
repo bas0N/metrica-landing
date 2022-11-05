@@ -106,6 +106,16 @@ function NavbarComponent() {
         <Navbar.Link isActive={router.pathname === "/faq"} href="/faq">
           FAQ
         </Navbar.Link>
+        <Navbar.Link
+          isActive={
+            router.pathname === "/dashboard" ||
+            router.pathname === "/dashboard/send-form" ||
+            router.pathname === "/dashboard/manage-recruitments"
+          }
+          href="/dashboard"
+        >
+          Dashboard
+        </Navbar.Link>
       </Navbar.Content>
       <Navbar.Content
         css={{
@@ -148,7 +158,13 @@ function NavbarComponent() {
                   </Text>
                 </Dropdown.Item>
                 <Dropdown.Item key="settings" withDivider>
-                  My Settings
+                  <div
+                    onClick={() => {
+                      router.push("/dashboard");
+                    }}
+                  >
+                    Dashboard
+                  </div>
                 </Dropdown.Item>
                 <Dropdown.Item key="team_settings">Team Settings</Dropdown.Item>
                 <Dropdown.Item key="analytics" withDivider>
