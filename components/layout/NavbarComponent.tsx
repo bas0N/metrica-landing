@@ -22,6 +22,7 @@ import Link from "next/link";
 import { AppDispatch } from "../../app/store";
 import { useEffect } from "react";
 import { useUser } from "@auth0/nextjs-auth0";
+import { GetServerSidePropsContext } from "next";
 
 function NavbarComponent() {
   const dispatch = useDispatch<AppDispatch>();
@@ -31,10 +32,14 @@ function NavbarComponent() {
 
   useEffect(() => {
     console.log(user);
+    if (error) {
+      console.log("error in navbar");
+      router.replace("/");
+    }
     if (user) {
       setUserState(user);
     }
-  }, [user]);
+  }, [user, error]);
   const router = useRouter();
 
   const { setTheme } = useNextTheme();
@@ -101,6 +106,16 @@ function NavbarComponent() {
         <Navbar.Link isActive={router.pathname === "/faq"} href="/faq">
           FAQ
         </Navbar.Link>
+        <Navbar.Link
+          isActive={
+            router.pathname === "/dashboard" ||
+            router.pathname === "/dashboard/send-form" ||
+            router.pathname === "/dashboard/manage-recruitments"
+          }
+          href="/dashboard"
+        >
+          Dashboard
+        </Navbar.Link>
       </Navbar.Content>
       <Navbar.Content
         css={{
@@ -143,7 +158,13 @@ function NavbarComponent() {
                   </Text>
                 </Dropdown.Item>
                 <Dropdown.Item key="settings" withDivider>
-                  My Settings
+                  <div
+                    onClick={() => {
+                      router.push("/dashboard");
+                    }}
+                  >
+                    Dashboard
+                  </div>
                 </Dropdown.Item>
                 <Dropdown.Item key="team_settings">Team Settings</Dropdown.Item>
                 <Dropdown.Item key="analytics" withDivider>

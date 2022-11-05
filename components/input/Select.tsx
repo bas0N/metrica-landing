@@ -11,7 +11,7 @@ function Select({ command, options }: SelectProps) {
   return (
     <div className="mt-4">
       <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400 ">
-        Select an option
+        {command}
       </label>
       <select
         defaultValue={"DEFAULT"}
@@ -20,7 +20,6 @@ function Select({ command, options }: SelectProps) {
           isDark ? "bg-zinc-900" : "bg-gray-100"
         }`}
       >
-        <option value="DEFAULT">{command}</option>
         {options.map((option, index) => (
           <option value={option.value} key={index}>
             {option.desc}
