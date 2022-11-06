@@ -21,6 +21,9 @@ function SendFormToApplicant() {
     setLastName("");
     setEmail("");
   };
+  const handleSubmit = () => {
+    console.log({ firstName, lastName, email });
+  };
   const selectReqruitmentData: SelectProps = {
     command: "Choose recruitment process",
     options: [
@@ -79,7 +82,14 @@ function SendFormToApplicant() {
         >
           Cancel
         </Button>
-        <Button shadow auto color="success" className="bg-green-500" href="/">
+        <Button
+          onClick={handleSubmit}
+          shadow
+          auto
+          color="success"
+          className="bg-green-500"
+          href="/"
+        >
           Create
         </Button>
       </div>
