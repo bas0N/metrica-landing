@@ -1,6 +1,7 @@
 import {
   Button,
   Checkbox,
+  FormElement,
   Input,
   Radio,
   Text,
@@ -8,7 +9,27 @@ import {
 } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 
+const initialValues = {
+  id: "elololl",
+  name: "",
+  description: "",
+  date: "",
+  radio: "1",
+};
 function AddApplication() {
+  const [values, setValues] = useState(initialValues);
+  const handleInputChange = (event: React.ChangeEvent<FormElement>) => {
+    const { name, value } = event.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
+    console.log({
+      ...values,
+      [name]: value,
+    });
+  };
+
   const [checked, setChecked] = React.useState("");
   const [isMobile, setIsMobile] = useState(false);
   const Mobile = () => {
@@ -30,31 +51,46 @@ function AddApplication() {
       <div className="flex flex-col justify-around h-full">
         <Text className="text-5xl  font-bold">Provide recruitment details</Text>
         <Input
+          onChange={handleInputChange}
+          value={initialValues.id}
+          name="id"
           underlined
           labelPlaceholder="Id of the recruitment process "
           color="default"
         />
         <Input
+          onChange={handleInputChange}
+          name="name"
           underlined
           labelPlaceholder="Name of the position"
           color="default"
         />
 
-        <Input width="186px" label="Questionare ending date" type="date" />
+        <Input
+          onChange={handleInputChange}
+          name="date"
+          width="186px"
+          label="Questionare ending date"
+          type="date"
+        />
         <Textarea
+          onChange={handleInputChange}
+          name="description"
           label="Description"
           helperText="Please enter the description of the reqriutment process"
           placeholder="Enter your name"
         />
         <Radio.Group
           label="Select questionare type"
-          value={checked}
+          value={initialValues.radio}
           onChange={setChecked}
+          name="radio"
           defaultValue="1"
           orientation={isMobile ? "vertical" : "horizontal"}
         >
           <Radio
             value="1"
+            name="radio"
             isSquared
             color="success"
             description="React, Angular Vue"
