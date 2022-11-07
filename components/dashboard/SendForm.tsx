@@ -25,6 +25,7 @@ function SendFormToApplicant() {
     setFirstName("");
     setLastName("");
     setEmail("");
+    setDescription("");
   };
   const handleOptionChange = (value: string) => {
     setOption(value);
