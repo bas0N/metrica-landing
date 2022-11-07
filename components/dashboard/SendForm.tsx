@@ -7,6 +7,7 @@ function SendFormToApplicant() {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [option, setOption] = useState("");
+  const [description, setDescription] = useState("");
 
   const handleFirstNameChange = (event: React.ChangeEvent<FormElement>) => {
     setFirstName(event.target.value);
@@ -16,6 +17,9 @@ function SendFormToApplicant() {
   };
   const handleEmailChange = (event: React.ChangeEvent<FormElement>) => {
     setEmail(event.target.value);
+  };
+  const handleDescriptionChange = (event: React.ChangeEvent<FormElement>) => {
+    setDescription(event.target.value);
   };
   const handleCancel = () => {
     setFirstName("");
@@ -27,7 +31,7 @@ function SendFormToApplicant() {
   };
   const handleSubmit = () => {
     //validate data
-    console.log({ firstName, lastName, email });
+    console.log({ firstName, lastName, email, option, description });
   };
   const selectReqruitmentData: SelectProps = {
     command: "Choose recruitment process",
@@ -70,6 +74,8 @@ function SendFormToApplicant() {
       </div>
       <div className="grid-cols-1 grid">
         <Textarea
+          value={description}
+          onChange={handleDescriptionChange}
           label="Description"
           helperText="Please enter the description of the reqriutment process"
           placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
