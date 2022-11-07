@@ -1,12 +1,19 @@
 import { useTheme } from "@nextui-org/react";
-import React from "react";
+import React, { useState } from "react";
 export interface SelectProps {
   command: string;
   options: Array<{ value: string; desc: string }>;
+  handler?: any;
 }
-function Select({ command, options }: SelectProps) {
+function Select({ command, options, handler }: SelectProps) {
   const { isDark, type } = useTheme();
 
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    console.log(event.target.value);
+    if (handler) {
+      handler(event.target.value);
+    }
+  };
   console.log(options);
   return (
     <div className="mt-4">
@@ -14,6 +21,7 @@ function Select({ command, options }: SelectProps) {
         {command}
       </label>
       <select
+        onChange={handleChange}
         defaultValue={"DEFAULT"}
         id="countries"
         className={` focus:ring-green-500 focus:border-green-500 focus:shadow-xl hover:shadow-lg   w-full p-2.5 text-sm rounded-lg  ${

@@ -6,6 +6,7 @@ function SendFormToApplicant() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [option, setOption] = useState("");
 
   const handleFirstNameChange = (event: React.ChangeEvent<FormElement>) => {
     setFirstName(event.target.value);
@@ -21,7 +22,11 @@ function SendFormToApplicant() {
     setLastName("");
     setEmail("");
   };
+  const handleOptionChange = (value: string) => {
+    setOption(value);
+  };
   const handleSubmit = () => {
+    //validate data
     console.log({ firstName, lastName, email });
   };
   const selectReqruitmentData: SelectProps = {
@@ -61,7 +66,7 @@ function SendFormToApplicant() {
           labelPlaceholder="Email"
         />
 
-        <Select {...selectReqruitmentData} />
+        <Select handler={handleOptionChange} {...selectReqruitmentData} />
       </div>
       <div className="grid-cols-1 grid">
         <Textarea
