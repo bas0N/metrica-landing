@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import { Text, Input, Textarea, Button, FormElement } from "@nextui-org/react";
 import Select, { SelectProps } from "../input/Select";
+import { Recruitment } from "../../types/recruitment";
 
-function SendFormToApplicant() {
+function SendFormToApplicant({
+  recruitments,
+}: {
+  recruitments: Recruitment[];
+}) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");

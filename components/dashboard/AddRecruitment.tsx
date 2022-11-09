@@ -8,6 +8,7 @@ import {
   Textarea,
 } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
+import { Recruitment } from "../../types/recruitment";
 
 const initialValues = {
   id: "elololl",
@@ -15,7 +16,7 @@ const initialValues = {
   description: "",
   date: "",
 };
-function AddApplication() {
+function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
   const [values, setValues] = useState(initialValues);
   const [checked, setChecked] = React.useState("");
   const [isMobile, setIsMobile] = useState(false);
@@ -29,6 +30,8 @@ function AddApplication() {
     return false;
   };
   useEffect(() => {
+    console.log("inside components");
+    console.log(recruitments);
     setIsMobile(Mobile());
     console.log(Mobile());
   }, [window.innerWidth]);
