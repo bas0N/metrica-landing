@@ -41,13 +41,9 @@ function SendFormToApplicant({
   };
   const selectReqruitmentData: SelectProps = {
     command: "Choose recruitment process",
-    options: [
-      { desc: "Senior React Developer", value: "1" },
-      { desc: "Senior Vue Developer", value: "2" },
-      { desc: "Junior Node Developer", value: "3" },
-      { desc: "Scrum Master", value: "4" },
-      { desc: "Head of Testing", value: "5" },
-    ],
+    options: recruitments.map((recruitment: Recruitment) => {
+      return { desc: recruitment.recruitmentName, value: recruitment._id };
+    }),
   };
   return (
     <div className="py-4 px-10 h-full max-w-[800px]">
