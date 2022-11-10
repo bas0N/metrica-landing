@@ -11,7 +11,8 @@ import React, { useEffect, useState } from "react";
 import { Recruitment } from "../../types/recruitment";
 import { SurveyType } from "../../types/survey";
 import ConfirmationModal from "../modals/ConfirmationModal";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const initialValues = {
   recruitmentId: "",
   recruitmentName: "",
@@ -64,6 +65,8 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
       }
     );
     const recruitment: any = await res.json();
+    toast.success("Recruitment added successfully.", { theme: "dark" });
+
     handleCancel();
     return {
       recruitment,
@@ -80,6 +83,7 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
   };
   return (
     <div className="py-4 px-10 h-full max-w-[800px]">
+      <ToastContainer />
       <div className="flex flex-col justify-around h-full">
         <Text className="text-5xl  font-bold">Provide recruitment details</Text>
         <Input
@@ -157,13 +161,13 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
         </Radio.Group>
         <div className="flex gap-4">
           <ConfirmationModal
-            confirmationPrompt="Are you sure?"
+            confirmationPrompt="Are you sure you want to cancel?"
             buttonTitle="Cancel"
             buttonType="CANCEL"
             funct={handleCancel}
           />
           <ConfirmationModal
-            confirmationPrompt="Are you sure?"
+            confirmationPrompt="Are you sure you want to add recruitment?"
             buttonTitle="Create"
             buttonType="CONFIRM"
             funct={handleSubmit}
