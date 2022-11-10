@@ -10,6 +10,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { Recruitment } from "../../types/recruitment";
 import { SurveyType } from "../../types/survey";
+import ConfirmationModal from "../modals/ConfirmationModal";
 
 const initialValues = {
   recruitmentId: "",
@@ -63,6 +64,7 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
       }
     );
     const recruitment: any = await res.json();
+    handleCancel();
     return {
       recruitment,
     };
@@ -154,26 +156,18 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
           </Radio>
         </Radio.Group>
         <div className="flex gap-4">
-          <Button
-            onClick={handleCancel}
-            shadow
-            auto
-            color="error"
-            className="bg-red-500"
-            href="/"
-          >
-            Cancel
-          </Button>
-          <Button
-            onClick={handleSubmit}
-            shadow
-            auto
-            color="success"
-            className="bg-green-500"
-            href="/"
-          >
-            Create
-          </Button>
+          <ConfirmationModal
+            confirmationPrompt="Are you sure?"
+            buttonTitle="Cancel"
+            buttonType="CANCEL"
+            funct={handleCancel}
+          />
+          <ConfirmationModal
+            confirmationPrompt="Are you sure?"
+            buttonTitle="Create"
+            buttonType="CONFIRM"
+            funct={handleSubmit}
+          />
         </div>
       </div>
     </div>
