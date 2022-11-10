@@ -9,16 +9,17 @@ import {
 } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 import { Recruitment } from "../../types/recruitment";
+import { SurveyType } from "../../types/survey";
 
 const initialValues = {
-  id: "elololl",
-  name: "",
-  description: "",
-  date: "",
+  recruitmentId: "",
+  recruitmentName: "",
+  recruitmentDescription: "",
+  recruitmentDeadline: "",
 };
 function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
   const [values, setValues] = useState(initialValues);
-  const [checked, setChecked] = React.useState("");
+  const [checked, setChecked] = useState<string>(SurveyType[0]);
   const [isMobile, setIsMobile] = useState(false);
   const Mobile = () => {
     if (typeof window !== "undefined") {
@@ -46,16 +47,33 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
       [name]: value,
     });
   };
-  const handleSubmit = () => {
-    console.log({ ...values, checked });
+  const handleSubmit = async () => {
+    //console.log({ ...values, checked });
+    const res = await fetch(
+      `http://localhost:3001/recruitment/addRecruitment`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...values,
+          surveyType: SurveyType[checked as keyof typeof SurveyType],
+        }),
+      }
+    );
+    const recruitment: any = await res.json();
+    return {
+      recruitment,
+    };
   };
   const handleCancel = () => {
     setChecked("1");
     setValues({
-      id: "",
-      name: "",
-      description: "",
-      date: "",
+      recruitmentId: "",
+      recruitmentName: "",
+      recruitmentDescription: "",
+      recruitmentDeadline: "",
     });
   };
   return (
@@ -64,16 +82,16 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
         <Text className="text-5xl  font-bold">Provide recruitment details</Text>
         <Input
           onChange={handleInputChange}
-          value={values.id}
-          name="id"
+          value={values.recruitmentId}
+          name="recruitmentId"
           underlined
           labelPlaceholder="Id of the recruitment process "
           color="default"
         />
         <Input
           onChange={handleInputChange}
-          value={values.name}
-          name="name"
+          value={values.recruitmentName}
+          name="recruitmentName"
           underlined
           labelPlaceholder="Name of the position"
           color="default"
@@ -81,16 +99,16 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
 
         <Input
           onChange={handleInputChange}
-          value={values.date}
-          name="date"
+          value={values.recruitmentDeadline}
+          name="recruitmentDeadline"
           width="186px"
           label="Questionare ending date"
           type="date"
         />
         <Textarea
           onChange={handleInputChange}
-          value={values.description}
-          name="description"
+          value={values.recruitmentDescription}
+          name="recruitmentDescription"
           label="Description"
           helperText="Please enter the description of the reqriutment process"
           placeholder="Enter your name"
@@ -103,7 +121,7 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
           orientation={isMobile ? "vertical" : "horizontal"}
         >
           <Radio
-            value="1"
+            value="FRONTEND"
             isSquared
             color="success"
             description="React, Angular Vue"
@@ -111,7 +129,7 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
             Frontend
           </Radio>
           <Radio
-            value="2"
+            value="BACKEND"
             isSquared
             color="success"
             description="NodeJS, Python, Go"
@@ -119,7 +137,7 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
             Backend
           </Radio>
           <Radio
-            value="3"
+            value="DEVOPS"
             isSquared
             color="success"
             description="AWS, Azure, Docker"
@@ -127,7 +145,7 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
             Devops
           </Radio>
           <Radio
-            value="4"
+            value="UXUI"
             isSquared
             color="success"
             description="Figma, AdobeXd, Sketch"

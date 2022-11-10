@@ -23,6 +23,7 @@ function SendForm({ recruitments }: { recruitments: Recruitment[] }) {
     }
   }, [user]);
   if (isLoading) {
+    //add isLoading component
     return <div></div>;
   } else if (user) {
     return <SendFormToApplicant recruitments={recruitments} />;
