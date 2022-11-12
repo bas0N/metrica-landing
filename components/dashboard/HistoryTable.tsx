@@ -20,7 +20,7 @@ import { Survey, SurveyStatus } from "../../types/survey";
 function HistoryTable({ surveys }: { surveys: Survey[] }) {
   const columns = [
     { name: "NAME", uid: "name" },
-    { name: "ROLE", uid: "role" },
+    { name: "POSITION", uid: "position" },
     { name: "STATUS", uid: "status" },
     { name: "ACTIONS", uid: "actions" },
   ];
@@ -78,11 +78,11 @@ function HistoryTable({ surveys }: { surveys: Survey[] }) {
     },
   ];
   */
-  const users = surveys.map((survey) => {
+  const surveysDataToRender = surveys.map((survey) => {
     return {
       id: survey._id,
       name: `${survey.candidateFirstName} ${survey.candidateLastName}`,
-      role: survey.recruitment.recruitmentName,
+      position: survey.recruitment.recruitmentName,
       team: survey.recruitment.recruitmentId,
       status: SurveyStatus[survey.surveyStatus],
       age: "24",
@@ -91,19 +91,34 @@ function HistoryTable({ surveys }: { surveys: Survey[] }) {
       email: survey.recipientEmail,
     };
   });
-  const renderCell = (user: any, columnKey: any) => {
-    const cellValue = user[columnKey];
+  const handleDelete = async (surveyId: string) => {
+    console.log(surveyId);
+    try {
+      const res = await fetch(`http://localhost:3001/survey/${surveyId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const response: any = await res.json();
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const renderCell = (survey: any, columnKey: any) => {
+    const cellValue = survey[columnKey];
     switch (columnKey) {
       case "name":
         return (
           <div>
-            <h3 className="font-bold">{user.name}</h3>
+            <h3 className="font-bold">{survey.name}</h3>
             <Text b size={13} css={{ color: "$accents7" }}>
-              {user.email}
+              {survey.email}
             </Text>
           </div>
         );
-      case "role":
+      case "position":
         return (
           <Col>
             <Row>
@@ -113,7 +128,7 @@ function HistoryTable({ surveys }: { surveys: Survey[] }) {
             </Row>
             <Row>
               <Text b size={13} css={{ tt: "capitalize", color: "$accents7" }}>
-                {user.team}
+                {survey.team}
               </Text>
             </Row>
           </Col>
@@ -121,10 +136,10 @@ function HistoryTable({ surveys }: { surveys: Survey[] }) {
       case "status":
         return (
           <Col>
-            <StyledBadge type={user.status}>{cellValue}</StyledBadge>
+            <StyledBadge type={survey.status}>{cellValue}</StyledBadge>
             <Row>
               <Text b size={13} css={{ tt: "capitalize", color: "$accents7" }}>
-                {user.deadline}
+                {survey.deadline}
               </Text>
             </Row>
           </Col>
@@ -135,14 +150,14 @@ function HistoryTable({ surveys }: { surveys: Survey[] }) {
           <Row justify="center" align="center">
             <Col css={{ d: "flex" }}>
               <Tooltip content="Details">
-                <IconButton onClick={() => console.log("View user", user.id)}>
+                <IconButton onClick={() => console.log("View user", survey.id)}>
                   <EyeIcon size={20} fill="#979797" />
                 </IconButton>
               </Tooltip>
             </Col>
             <Col css={{ d: "flex" }}>
               <Tooltip content="Edit user">
-                <IconButton onClick={() => console.log("Edit user", user.id)}>
+                <IconButton onClick={() => console.log("Edit user", survey.id)}>
                   <EditIcon size={20} fill="#979797" />
                 </IconButton>
               </Tooltip>
@@ -151,7 +166,9 @@ function HistoryTable({ surveys }: { surveys: Survey[] }) {
               <Tooltip
                 content="Delete user"
                 color="error"
-                onClick={() => console.log("Delete user", user.id)}
+                onClick={() => {
+                  handleDelete(survey.id);
+                }}
               >
                 <IconButton>
                   <DeleteIcon size={20} fill="#FF0080" />
@@ -185,7 +202,7 @@ function HistoryTable({ surveys }: { surveys: Survey[] }) {
             </Table.Column>
           )}
         </Table.Header>
-        <Table.Body items={users}>
+        <Table.Body items={surveysDataToRender}>
           {(item) => (
             <Table.Row>
               {(columnKey) => (
