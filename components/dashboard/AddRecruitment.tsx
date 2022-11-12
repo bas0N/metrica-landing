@@ -8,16 +8,20 @@ import {
   Textarea,
 } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
-
+import { Recruitment } from "../../types/recruitment";
+import { SurveyType } from "../../types/survey";
+import ConfirmationModal from "../modals/ConfirmationModal";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const initialValues = {
-  id: "elololl",
-  name: "",
-  description: "",
-  date: "",
+  recruitmentId: "",
+  recruitmentName: "",
+  recruitmentDescription: "",
+  recruitmentDeadline: "",
 };
-function AddApplication() {
+function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
   const [values, setValues] = useState(initialValues);
-  const [checked, setChecked] = React.useState("");
+  const [checked, setChecked] = useState<string>(SurveyType[0]);
   const [isMobile, setIsMobile] = useState(false);
   const Mobile = () => {
     if (typeof window !== "undefined") {
@@ -29,6 +33,8 @@ function AddApplication() {
     return false;
   };
   useEffect(() => {
+    console.log("inside components");
+    console.log(recruitments);
     setIsMobile(Mobile());
     console.log(Mobile());
   }, [window.innerWidth]);
@@ -43,34 +49,55 @@ function AddApplication() {
       [name]: value,
     });
   };
-  const handleSubmit = () => {
-    console.log({ ...values, checked });
+  const handleSubmit = async () => {
+    //console.log({ ...values, checked });
+    const res = await fetch(
+      `http://localhost:3001/recruitment/addRecruitment`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...values,
+          surveyType: SurveyType[checked as keyof typeof SurveyType],
+        }),
+      }
+    );
+    const recruitment: any = await res.json();
+    toast.success("Recruitment added successfully.", { theme: "dark" });
+
+    handleCancel();
+    return {
+      recruitment,
+    };
   };
   const handleCancel = () => {
     setChecked("1");
     setValues({
-      id: "",
-      name: "",
-      description: "",
-      date: "",
+      recruitmentId: "",
+      recruitmentName: "",
+      recruitmentDescription: "",
+      recruitmentDeadline: "",
     });
   };
   return (
     <div className="py-4 px-10 h-full max-w-[800px]">
+      <ToastContainer />
       <div className="flex flex-col justify-around h-full">
         <Text className="text-5xl  font-bold">Provide recruitment details</Text>
         <Input
           onChange={handleInputChange}
-          value={values.id}
-          name="id"
+          value={values.recruitmentId}
+          name="recruitmentId"
           underlined
           labelPlaceholder="Id of the recruitment process "
           color="default"
         />
         <Input
           onChange={handleInputChange}
-          value={values.name}
-          name="name"
+          value={values.recruitmentName}
+          name="recruitmentName"
           underlined
           labelPlaceholder="Name of the position"
           color="default"
@@ -78,16 +105,16 @@ function AddApplication() {
 
         <Input
           onChange={handleInputChange}
-          value={values.date}
-          name="date"
+          value={values.recruitmentDeadline}
+          name="recruitmentDeadline"
           width="186px"
           label="Questionare ending date"
           type="date"
         />
         <Textarea
           onChange={handleInputChange}
-          value={values.description}
-          name="description"
+          value={values.recruitmentDescription}
+          name="recruitmentDescription"
           label="Description"
           helperText="Please enter the description of the reqriutment process"
           placeholder="Enter your name"
@@ -100,7 +127,7 @@ function AddApplication() {
           orientation={isMobile ? "vertical" : "horizontal"}
         >
           <Radio
-            value="1"
+            value="FRONTEND"
             isSquared
             color="success"
             description="React, Angular Vue"
@@ -108,7 +135,7 @@ function AddApplication() {
             Frontend
           </Radio>
           <Radio
-            value="2"
+            value="BACKEND"
             isSquared
             color="success"
             description="NodeJS, Python, Go"
@@ -116,7 +143,7 @@ function AddApplication() {
             Backend
           </Radio>
           <Radio
-            value="3"
+            value="DEVOPS"
             isSquared
             color="success"
             description="AWS, Azure, Docker"
@@ -124,7 +151,7 @@ function AddApplication() {
             Devops
           </Radio>
           <Radio
-            value="4"
+            value="UXUI"
             isSquared
             color="success"
             description="Figma, AdobeXd, Sketch"
@@ -133,26 +160,18 @@ function AddApplication() {
           </Radio>
         </Radio.Group>
         <div className="flex gap-4">
-          <Button
-            onClick={handleCancel}
-            shadow
-            auto
-            color="error"
-            className="bg-red-500"
-            href="/"
-          >
-            Cancel
-          </Button>
-          <Button
-            onClick={handleSubmit}
-            shadow
-            auto
-            color="success"
-            className="bg-green-500"
-            href="/"
-          >
-            Create
-          </Button>
+          <ConfirmationModal
+            confirmationPrompt="Are you sure you want to cancel?"
+            buttonTitle="Cancel"
+            buttonType="CANCEL"
+            funct={handleCancel}
+          />
+          <ConfirmationModal
+            confirmationPrompt="Are you sure you want to add recruitment?"
+            buttonTitle="Create"
+            buttonType="CONFIRM"
+            funct={handleSubmit}
+          />
         </div>
       </div>
     </div>

@@ -1,10 +1,20 @@
 import { useUser } from "@auth0/nextjs-auth0";
+import { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import AddRecruitment from "../../components/dashboard/AddRecruitment";
 import DashboardLayout from "../../components/layout/DashboardLayout";
-
-function ManageRecruitments() {
+import { Recruitment } from "../../types/recruitment";
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const res = await fetch(
+    `http://localhost:3001/recruitment/getAllRecruitments`
+  );
+  const recruitments: Array<Recruitment> = await res.json();
+  return {
+    props: { recruitments },
+  };
+}
+function ManageRecruitments({ recruitments }: { recruitments: Recruitment[] }) {
   const { user, error, isLoading } = useUser();
   const router = useRouter();
   useEffect(() => {
@@ -15,10 +25,11 @@ function ManageRecruitments() {
   if (isLoading) {
     return <div></div>;
   } else if (user) {
-    return <AddRecruitment />;
+    return <AddRecruitment recruitments={recruitments} />;
   } else if (!user) {
     router.replace("/");
   }
 }
+
 ManageRecruitments.PageLayout = DashboardLayout;
 export default ManageRecruitments;

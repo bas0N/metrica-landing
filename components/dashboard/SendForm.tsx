@@ -1,70 +1,110 @@
 import React, { useState } from "react";
-import { Text, Input, Textarea, Button, FormElement } from "@nextui-org/react";
+import {
+  Text,
+  Input,
+  Textarea,
+  Button,
+  FormElement,
+  GridProps,
+  Grid,
+} from "@nextui-org/react";
 import Select, { SelectProps } from "../input/Select";
-
-function SendFormToApplicant() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [option, setOption] = useState("");
-  const [description, setDescription] = useState("");
+import { Recruitment } from "../../types/recruitment";
+import { SurveyStatus, SurveyType } from "../../types/survey";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+function SendFormToApplicant({
+  recruitments,
+}: {
+  recruitments: Recruitment[];
+}) {
+  const [candidateFirstName, setCandidateFirstName] = useState<string>("");
+  const [candidateLastName, setCandidateLastName] = useState<string>("");
+  const [recipientEmail, setRecipientEmail] = useState<string>("");
+  const [option, setOption] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
 
   const handleFirstNameChange = (event: React.ChangeEvent<FormElement>) => {
-    setFirstName(event.target.value);
+    setCandidateFirstName(event.target.value);
   };
   const handlelastNameChange = (event: React.ChangeEvent<FormElement>) => {
-    setLastName(event.target.value);
+    setCandidateLastName(event.target.value);
   };
   const handleEmailChange = (event: React.ChangeEvent<FormElement>) => {
-    setEmail(event.target.value);
+    setRecipientEmail(event.target.value);
   };
   const handleDescriptionChange = (event: React.ChangeEvent<FormElement>) => {
     setDescription(event.target.value);
   };
   const handleCancel = () => {
-    setFirstName("");
-    setLastName("");
-    setEmail("");
+    setCandidateFirstName("");
+    setCandidateLastName("");
+    setRecipientEmail("");
     setDescription("");
+    setOption("");
   };
   const handleOptionChange = (value: string) => {
     setOption(value);
   };
-  const handleSubmit = () => {
-    //validate data
-    console.log({ firstName, lastName, email, option, description });
+  const handleSubmit = async () => {
+    try {
+      const res = await fetch(`http://localhost:3001/survey/createSurvey`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: "elam@gmail.com",
+          addSurveyDto: {
+            recipientEmail,
+            candidateFirstName,
+            candidateLastName,
+            surveyStatus: SurveyStatus[1],
+            recruitmentId: option,
+            terminationDate: new Date("2023-10-10"),
+          },
+        }),
+      });
+      if (res.status === 500) {
+        toast.error("Error occured while sending a form.", { theme: "dark" });
+      } else {
+        toast.success("Form sent successfully.", { theme: "dark" });
+        const recruitment: any = await res.json();
+        handleCancel();
+      }
+    } catch (err) {
+      toast.error(JSON.stringify(err), { theme: "dark" });
+    }
   };
   const selectReqruitmentData: SelectProps = {
     command: "Choose recruitment process",
-    options: [
-      { desc: "Senior React Developer", value: "1" },
-      { desc: "Senior Vue Developer", value: "2" },
-      { desc: "Junior Node Developer", value: "3" },
-      { desc: "Scrum Master", value: "4" },
-      { desc: "Head of Testing", value: "5" },
-    ],
+    options: recruitments.map((recruitment: Recruitment) => {
+      return { desc: recruitment.recruitmentName, value: recruitment._id };
+    }),
   };
   return (
     <div className="py-4 px-10 h-full max-w-[800px]">
+      <ToastContainer />
+
       <Text className="text-5xl  font-bold">Provide candidate details</Text>
 
-      <div className="grid grid-cols-2 mt-16 gap-10 w-full ">
+      <Grid.Container className="grid grid-cols-2 mt-16 gap-10 w-full ">
         <Input
-          value={firstName}
+          value={candidateFirstName}
           onChange={handleFirstNameChange}
           clearable
           underlined
           labelPlaceholder="Firstname"
         />
         <Input
-          value={lastName}
+          value={candidateLastName}
           onChange={handlelastNameChange}
           clearable
           underlined
           labelPlaceholder="Lastname"
         />
         <Input
-          value={email}
+          value={recipientEmail}
           onChange={handleEmailChange}
           clearable
           underlined
@@ -72,7 +112,7 @@ function SendFormToApplicant() {
         />
 
         <Select handler={handleOptionChange} {...selectReqruitmentData} />
-      </div>
+      </Grid.Container>
       <div className="grid-cols-1 grid">
         <Textarea
           value={description}
