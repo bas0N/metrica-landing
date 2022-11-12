@@ -16,13 +16,15 @@ import { EyeIcon } from "../../components/table/EyeIcon";
 import { EditIcon } from "../../components/table/EditIcon";
 import { DeleteIcon } from "../../components/table/DeleteIcon";
 import { AnyARecord } from "dns";
-function HistoryTable() {
+import { Survey, SurveyStatus } from "../../types/survey";
+function HistoryTable({ surveys }: { surveys: Survey[] }) {
   const columns = [
     { name: "NAME", uid: "name" },
     { name: "ROLE", uid: "role" },
     { name: "STATUS", uid: "status" },
     { name: "ACTIONS", uid: "actions" },
   ];
+  /*
   const users = [
     {
       id: 1,
@@ -75,6 +77,20 @@ function HistoryTable() {
       email: "kristen.cooper@example.com",
     },
   ];
+  */
+  const users = surveys.map((survey) => {
+    return {
+      id: survey._id,
+      name: `${survey.candidateFirstName} ${survey.candidateLastName}`,
+      role: survey.recruitment.recruitmentName,
+      team: survey.recruitment.recruitmentId,
+      status: SurveyStatus[survey.surveyStatus],
+      age: "24",
+      deadline: survey.recruitment.recruitmentDeadline,
+      avatar: "https://i.pravatar.cc/150?u=a092581d4ef9026700d",
+      email: survey.recipientEmail,
+    };
+  });
   const renderCell = (user: any, columnKey: any) => {
     const cellValue = user[columnKey];
     switch (columnKey) {
@@ -103,7 +119,16 @@ function HistoryTable() {
           </Col>
         );
       case "status":
-        return <StyledBadge type={user.status}>{cellValue}</StyledBadge>;
+        return (
+          <Col>
+            <StyledBadge type={user.status}>{cellValue}</StyledBadge>
+            <Row>
+              <Text b size={13} css={{ tt: "capitalize", color: "$accents7" }}>
+                {user.deadline}
+              </Text>
+            </Row>
+          </Col>
+        );
 
       case "actions":
         return (
