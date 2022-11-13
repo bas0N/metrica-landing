@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Table,
   Row,
@@ -10,6 +10,7 @@ import {
   Grid,
   Pagination,
 } from "@nextui-org/react";
+
 import { StyledBadge } from "../../components/table/StyledBadge";
 import { IconButton } from "../../components/table/IconButton";
 import { EyeIcon } from "../../components/table/EyeIcon";
@@ -18,6 +19,7 @@ import { DeleteIcon } from "../../components/table/DeleteIcon";
 import { AnyARecord } from "dns";
 import { Survey, SurveyStatus } from "../../types/survey";
 function HistoryTable({ surveys }: { surveys: Survey[] }) {
+  const [surveysState, setSurveysState] = useState(surveys);
   const columns = [
     { name: "NAME", uid: "name" },
     { name: "POSITION", uid: "position" },
@@ -78,7 +80,7 @@ function HistoryTable({ surveys }: { surveys: Survey[] }) {
     },
   ];
   */
-  const surveysDataToRender = surveys.map((survey) => {
+  const surveysDataToRender = surveysState.map((survey) => {
     return {
       id: survey._id,
       name: `${survey.candidateFirstName} ${survey.candidateLastName}`,
@@ -101,6 +103,9 @@ function HistoryTable({ surveys }: { surveys: Survey[] }) {
         },
       });
       const response: any = await res.json();
+      //if success, delete form array
+      setSurveysState(surveysState.filter((survey) => survey._id !== surveyId));
+
       console.log(response);
     } catch (err) {
       console.log(err);
