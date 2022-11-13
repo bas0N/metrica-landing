@@ -158,7 +158,7 @@ function HistoryTable({ surveys }: { surveys: Survey[] }) {
   return (
     <div className="flex flex-col">
       <ToastContainer />
-      <div className="flex m-4 grid grid-cols-2 gap-3">
+      <div className=" m-4 grid grid-cols-2 gap-3">
         <div className="grid grid-cols-3 gap-1">
           <Dropdown>
             <Dropdown.Button
