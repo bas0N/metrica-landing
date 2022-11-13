@@ -12,6 +12,8 @@ import {
   Dropdown,
   Input,
 } from "@nextui-org/react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { StyledBadge } from "../../components/table/StyledBadge";
 import { IconButton } from "../../components/table/IconButton";
@@ -60,7 +62,18 @@ function HistoryTable({ surveys }: { surveys: Survey[] }) {
       });
       const response: any = await res.json();
       //if success, delete form array
-      setSurveysState(surveysState.filter((survey) => survey._id !== surveyId));
+      if (res.status !== 500 || 404) {
+        setSurveysState(
+          surveysState.filter((survey) => survey._id !== surveyId)
+        );
+        toast.success("Survey deleted succesfully successfully.", {
+          theme: "dark",
+        });
+      } else {
+        toast.error("Error occured while deleting a survey.", {
+          theme: "dark",
+        });
+      }
 
       console.log(response);
     } catch (err) {
@@ -144,6 +157,7 @@ function HistoryTable({ surveys }: { surveys: Survey[] }) {
   };
   return (
     <div className="flex flex-col">
+      <ToastContainer />
       <div className="flex m-4 grid grid-cols-2 gap-3">
         <div className="grid grid-cols-3 gap-1">
           <Dropdown>
