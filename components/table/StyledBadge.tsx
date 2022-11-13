@@ -17,20 +17,21 @@ export const StyledBadge = styled("span", {
   color: "$white",
   variants: {
     type: {
-      active: {
+      FILLED: {
         bg: "$successLight",
         color: "$successLightContrast",
       },
-      paused: {
+      PENDING: {
         bg: "$errorLight",
         color: "$errorLightContrast",
       },
-      vacation: {
+      DRAFT: {
         bg: "$warningLight",
         color: "$warningLightContrast",
       },
     },
   },
+
   defaultVariants: {
     type: "active",
   },

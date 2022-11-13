@@ -4,9 +4,18 @@ import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import HistoryTable from "../../components/dashboard/HistoryTable";
 import DashboardLayout from "../../components/layout/DashboardLayout";
+import { Survey } from "../../types/survey";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   if ("appSession" in context.req.cookies) {
+    try {
+      const res = await fetch(`http://localhost:3001/survey/getSurveys`);
+      const surveys: Array<Survey> = await res.json();
+      return { props: { surveys } };
+    } catch (err) {
+      console.log(err);
+    }
+
     return { props: {} };
   } else {
     return {
@@ -18,7 +27,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     };
   }
 }
-function index() {
+function index({ surveys }: { surveys: Survey[] }) {
   const router = useRouter();
   const { user, error, isLoading } = useUser();
 
@@ -35,7 +44,7 @@ function index() {
   } else if (user) {
     return (
       <div className="">
-        <HistoryTable />
+        <HistoryTable surveys={surveys} />
       </div>
     );
   } else if (!user) {
