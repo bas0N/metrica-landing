@@ -24,3 +24,15 @@ export type Survey = {
   creationDate: Date;
   __v: 0;
 };
+
+export type SurveyDataToRender = {
+  id: string;
+  name: string;
+  position: string;
+  team: string;
+  status: string;
+  age: string;
+  deadline: Date;
+  avatar: string;
+  email: string;
+};

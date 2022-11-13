@@ -9,6 +9,8 @@ import {
   Button,
   Grid,
   Pagination,
+  Dropdown,
+  Input,
 } from "@nextui-org/react";
 
 import { StyledBadge } from "../../components/table/StyledBadge";
@@ -17,69 +19,23 @@ import { EyeIcon } from "../../components/table/EyeIcon";
 import { EditIcon } from "../../components/table/EditIcon";
 import { DeleteIcon } from "../../components/table/DeleteIcon";
 import { AnyARecord } from "dns";
-import { Survey, SurveyStatus } from "../../types/survey";
+import { Survey, SurveyDataToRender, SurveyStatus } from "../../types/survey";
 function HistoryTable({ surveys }: { surveys: Survey[] }) {
   const [surveysState, setSurveysState] = useState(surveys);
+  //dropdown
+  const [selected, setSelected] = React.useState<any>(new Set(["text"]));
+
+  const selectedValue = React.useMemo(
+    () => Array.from(selected).join(", ").replaceAll("_", " "),
+    [selected]
+  );
   const columns = [
     { name: "NAME", uid: "name" },
     { name: "POSITION", uid: "position" },
     { name: "STATUS", uid: "status" },
     { name: "ACTIONS", uid: "actions" },
   ];
-  /*
-  const users = [
-    {
-      id: 1,
-      name: "Tony Reichert",
-      role: "CEO",
-      team: "Management",
-      status: "active",
-      age: "29",
-      avatar: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
-      email: "tony.reichert@example.com",
-    },
-    {
-      id: 2,
-      name: "Zoey Lang",
-      role: "Technical Lead",
-      team: "Development",
-      status: "paused",
-      age: "25",
-      avatar: "https://i.pravatar.cc/150?u=a042581f4e29026704d",
-      email: "zoey.lang@example.com",
-    },
-    {
-      id: 3,
-      name: "Jane Fisher",
-      role: "Senior Developer",
-      team: "Development",
-      status: "active",
-      age: "22",
-      avatar: "https://i.pravatar.cc/150?u=a04258114e29026702d",
-      email: "jane.fisher@example.com",
-    },
-    {
-      id: 4,
-      name: "William Howard",
-      role: "Community Manager",
-      team: "Marketing",
-      status: "vacation",
-      age: "28",
-      avatar: "https://i.pravatar.cc/150?u=a048581f4e29026701d",
-      email: "william.howard@example.com",
-    },
-    {
-      id: 5,
-      name: "Kristen Copper",
-      role: "Sales Manager",
-      team: "Sales",
-      status: "active",
-      age: "24",
-      avatar: "https://i.pravatar.cc/150?u=a092581d4ef9026700d",
-      email: "kristen.cooper@example.com",
-    },
-  ];
-  */
+
   const surveysDataToRender = surveysState.map((survey) => {
     return {
       id: survey._id,
@@ -188,6 +144,84 @@ function HistoryTable({ surveys }: { surveys: Survey[] }) {
   };
   return (
     <div className="flex flex-col">
+      <div className="flex m-4 grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-3 gap-1">
+          <Dropdown>
+            <Dropdown.Button
+              className="bg-green-500/50 "
+              flat
+              color="success"
+              css={{ tt: "capitalize" }}
+            >
+              {selectedValue}
+            </Dropdown.Button>
+            <Dropdown.Menu
+              aria-label="Single selection actions"
+              color="success"
+              disallowEmptySelection
+              selectionMode="single"
+              selectedKeys={selected}
+              onSelectionChange={setSelected}
+            >
+              <Dropdown.Item key="text">Text</Dropdown.Item>
+              <Dropdown.Item key="number">Number</Dropdown.Item>
+              <Dropdown.Item key="date">Date</Dropdown.Item>
+              <Dropdown.Item key="single_date">Single Date</Dropdown.Item>
+              <Dropdown.Item key="iteration">Iteration</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+          <Dropdown>
+            <Dropdown.Button
+              className="bg-green-500/50 "
+              flat
+              color="success"
+              css={{ tt: "capitalize" }}
+            >
+              {selectedValue}
+            </Dropdown.Button>
+            <Dropdown.Menu
+              aria-label="Single selection actions"
+              color="success"
+              disallowEmptySelection
+              selectionMode="single"
+              selectedKeys={selected}
+              onSelectionChange={setSelected}
+            >
+              <Dropdown.Item key="text">Text</Dropdown.Item>
+              <Dropdown.Item key="number">Number</Dropdown.Item>
+              <Dropdown.Item key="date">Date</Dropdown.Item>
+              <Dropdown.Item key="single_date">Single Date</Dropdown.Item>
+              <Dropdown.Item key="iteration">Iteration</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+          <Dropdown>
+            <Dropdown.Button
+              className="bg-green-500/50 "
+              flat
+              color="success"
+              css={{ tt: "capitalize" }}
+            >
+              {selectedValue}
+            </Dropdown.Button>
+            <Dropdown.Menu
+              aria-label="Single selection actions"
+              color="success"
+              disallowEmptySelection
+              selectionMode="single"
+              selectedKeys={selected}
+              onSelectionChange={setSelected}
+            >
+              <Dropdown.Item key="text">Text</Dropdown.Item>
+              <Dropdown.Item key="number">Number</Dropdown.Item>
+              <Dropdown.Item key="date">Date</Dropdown.Item>
+              <Dropdown.Item key="single_date">Single Date</Dropdown.Item>
+              <Dropdown.Item key="iteration">Iteration</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </div>
+
+        <Input className="col-end-6" size="lg" placeholder="Search" />
+      </div>
       <Table
         aria-label="Example table with custom cells"
         css={{
@@ -240,3 +274,57 @@ function HistoryTable({ surveys }: { surveys: Survey[] }) {
 }
 
 export default HistoryTable;
+/*
+  const users = [
+    {
+      id: 1,
+      name: "Tony Reichert",
+      role: "CEO",
+      team: "Management",
+      status: "active",
+      age: "29",
+      avatar: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
+      email: "tony.reichert@example.com",
+    },
+    {
+      id: 2,
+      name: "Zoey Lang",
+      role: "Technical Lead",
+      team: "Development",
+      status: "paused",
+      age: "25",
+      avatar: "https://i.pravatar.cc/150?u=a042581f4e29026704d",
+      email: "zoey.lang@example.com",
+    },
+    {
+      id: 3,
+      name: "Jane Fisher",
+      role: "Senior Developer",
+      team: "Development",
+      status: "active",
+      age: "22",
+      avatar: "https://i.pravatar.cc/150?u=a04258114e29026702d",
+      email: "jane.fisher@example.com",
+    },
+    {
+      id: 4,
+      name: "William Howard",
+      role: "Community Manager",
+      team: "Marketing",
+      status: "vacation",
+      age: "28",
+      avatar: "https://i.pravatar.cc/150?u=a048581f4e29026701d",
+      email: "william.howard@example.com",
+    },
+    {
+      id: 5,
+      name: "Kristen Copper",
+      role: "Sales Manager",
+      team: "Sales",
+      status: "active",
+      age: "24",
+      avatar: "https://i.pravatar.cc/150?u=a092581d4ef9026700d",
+      email: "kristen.cooper@example.com",
+    },
+  ];
+  */
