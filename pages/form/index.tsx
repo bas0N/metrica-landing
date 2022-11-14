@@ -25,6 +25,7 @@ import AboutYou from "../../components/form/AboutYou";
 import Links from "../../components/form/PersonalLinks";
 import PersonalLinks from "../../components/form/PersonalLinks";
 import { SelectProps } from "../../components/input/Select";
+import { SurveyType } from "../../types/survey";
 function index() {
   // const { setTheme } = useNextTheme();
   // const { isDark, type } = useTheme();
@@ -33,6 +34,9 @@ function index() {
   //   checked={isDark}
   //   onChange={(e) => setTheme(e.target.checked ? "dark" : "light")}
   // />;
+  const typeOfForm: SurveyType = 1;
+  const name: string = "Elon";
+  const companyName: string = "Tesla";
   return (
     <Container>
       <div className=" flex flex-col">

@@ -4,10 +4,8 @@ import {
   Row,
   Col,
   Tooltip,
-  User,
   Text,
   Button,
-  Grid,
   Pagination,
   Dropdown,
   Input,
@@ -21,8 +19,21 @@ import { EyeIcon } from "../../components/table/EyeIcon";
 import { EditIcon } from "../../components/table/EditIcon";
 import { DeleteIcon } from "../../components/table/DeleteIcon";
 import { AnyARecord } from "dns";
-import { Survey, SurveyDataToRender, SurveyStatus } from "../../types/survey";
-function HistoryTable({ surveys }: { surveys: Survey[] }) {
+import {
+  GetSurveysPaginated,
+  Survey,
+  SurveyDataToRender,
+  SurveyStatus,
+} from "../../types/survey";
+function HistoryTable({
+  surveys,
+  pagesAvailable,
+  totalItems,
+}: {
+  surveys: Survey[];
+  pagesAvailable: number;
+  totalItems: number;
+}) {
   const [surveysState, setSurveysState] = useState(surveys);
   //dropdown
   const [selected, setSelected] = React.useState<any>(new Set(["text"]));
@@ -78,6 +89,16 @@ function HistoryTable({ surveys }: { surveys: Survey[] }) {
       console.log(response);
     } catch (err) {
       console.log(err);
+    }
+  };
+  const handlePageChange = async (page: number) => {
+    const res = await fetch(
+      `http://localhost:3001/survey/getSurveysPaginated/${page}`
+    );
+    const { surveys, pagesAvailable, totalItems }: GetSurveysPaginated =
+      await res.json();
+    if (res.status != 500 || 400) {
+      setSurveysState(surveys);
     }
   };
   const renderCell = (survey: any, columnKey: any) => {
@@ -278,10 +299,11 @@ function HistoryTable({ surveys }: { surveys: Survey[] }) {
         </Button>
       </div>
       <Pagination
+        onChange={handlePageChange}
         className="self-center mt-6"
         shadow
         color="success"
-        total={10}
+        total={pagesAvailable}
       />
     </div>
   );

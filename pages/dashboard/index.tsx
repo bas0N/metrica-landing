@@ -4,14 +4,19 @@ import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import HistoryTable from "../../components/dashboard/HistoryTable";
 import DashboardLayout from "../../components/layout/DashboardLayout";
-import { Survey } from "../../types/survey";
+import { GetSurveysPaginated, Survey } from "../../types/survey";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   if ("appSession" in context.req.cookies) {
     try {
-      const res = await fetch(`http://localhost:3001/survey/getSurveys`);
-      const surveys: Array<Survey> = await res.json();
-      return { props: { surveys } };
+      //const res = await fetch(`http://localhost:3001/survey/getSurveys`);
+      //const surveys: Array<Survey> = await res.json();
+      const res = await fetch(
+        `http://localhost:3001/survey/getSurveysPaginated/1`
+      );
+      const { surveys, pagesAvailable, totalItems }: GetSurveysPaginated =
+        await res.json();
+      return { props: { surveys, pagesAvailable, totalItems } };
     } catch (err) {
       console.log(err);
     }
@@ -27,7 +32,15 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     };
   }
 }
-function index({ surveys }: { surveys: Survey[] }) {
+function index({
+  surveys,
+  pagesAvailable,
+  totalItems,
+}: {
+  surveys: Survey[];
+  pagesAvailable: number;
+  totalItems: number;
+}) {
   const router = useRouter();
   const { user, error, isLoading } = useUser();
 
@@ -44,7 +57,11 @@ function index({ surveys }: { surveys: Survey[] }) {
   } else if (user) {
     return (
       <div className="">
-        <HistoryTable surveys={surveys} />
+        <HistoryTable
+          surveys={surveys}
+          pagesAvailable={pagesAvailable}
+          totalItems={totalItems}
+        />
       </div>
     );
   } else if (!user) {
