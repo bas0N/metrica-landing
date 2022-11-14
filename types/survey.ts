@@ -36,3 +36,11 @@ export type SurveyDataToRender = {
   avatar: string;
   email: string;
 };
+export type GetNumberOfSurveyPages = {
+  numOfSurveyPages: 3;
+};
+export type GetSurveysPaginated = {
+  surveys: Survey[];
+  pagesAvailable: number;
+  totalItems: number;
+};
