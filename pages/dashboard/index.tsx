@@ -44,14 +44,6 @@ function index({
   const router = useRouter();
   const { user, error, isLoading } = useUser();
 
-  // useEffect(() => {
-  //   console.log(user);
-
-  //   if (!user) {
-  //     console.log("USER DOES NIT EXIST");
-  //     router.replace("/");
-  //   }
-  // }, []);
   if (isLoading) {
     return <div></div>;
   } else if (user) {
