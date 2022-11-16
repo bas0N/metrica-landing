@@ -101,6 +101,7 @@ function HistoryTable({
       setSurveysState(surveys);
     }
   };
+
   const renderCell = (survey: any, columnKey: any) => {
     const cellValue = survey[columnKey];
     switch (columnKey) {
