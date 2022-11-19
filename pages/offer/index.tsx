@@ -21,7 +21,7 @@ function index() {
   return (
     <div className="flex flex-col  ">
       <Text className="text-5xl sm:text-7xl  mt-10">How does it work?</Text>
-      <div className="flex flex-col  mt-20 mx-auto gap-8 mx-2">
+      <div className="flex flex-col  mt-20  gap-8 mx-2">
         <div className="flex flex-col sm:flex-row gap-10 ">
           <div className={`flex flex-col  ${isMobile ? "w-full" : "w-1/2"}`}>
             <Text className="text-5xl font-bold">Add your recruitment</Text>
