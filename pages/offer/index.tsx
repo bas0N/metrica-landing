@@ -1,13 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Card, Col, Popover, Row, Text } from "@nextui-org/react";
 
 function index() {
+  const [width, setWidth] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  const Mobile = () => {
+    if (typeof window !== "undefined") {
+      if (window.innerWidth < 1024) {
+        return true;
+      }
+      return false;
+    }
+    return false;
+  };
+  useEffect(() => {
+    setWidth(window.innerWidth - 20);
+    setIsMobile(Mobile());
+  });
   return (
     <div className="flex flex-col  ">
-      <Text className="text-7xl  mt-10">How does it work?</Text>
-      <div className="flex flex-col  mt-20 mx-auto gap-8">
-        <div className="flex gap-10">
-          <Card css={{ w: "50%", h: "300px" }}>
+      <Text className="text-5xl sm:text-7xl  mt-10">How does it work?</Text>
+      <div className="flex flex-col  mt-20 mx-auto gap-8 mx-2">
+        <div className="flex flex-col sm:flex-row gap-10 ">
+          <div className={`flex flex-col  ${isMobile ? "w-full" : "w-1/2"}`}>
+            <Text className="text-5xl font-bold">Add your recruitment</Text>
+            <Text className="mt-8">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </Text>
+          </div>
+          <Card
+            css={{
+              w: isMobile ? "100%" : "50%",
+              h: isMobile ? "200px" : "300px",
+            }}
+          >
             <Card.Header css={{ position: "absolute", zIndex: 1, top: 5 }}>
               <Col>
                 <Text
@@ -15,12 +45,8 @@ function index() {
                   weight="bold"
                   transform="uppercase"
                   color="#9E9E9E"
-                >
-                  Your day your way
-                </Text>
-                <Text h3 color="white">
-                  Your checklist for better sleep
-                </Text>
+                ></Text>
+                <Text h3 color="white"></Text>
               </Col>
             </Card.Header>
             <Card.Body css={{ p: 0 }}>
@@ -66,18 +92,9 @@ function index() {
               </Row>
             </Card.Footer>
           </Card>
-          <div className="flex flex-col  w-1/2">
-            <Text className="text-5xl font-bold">Add your recruitment</Text>
-            <Text className="mt-8">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </Text>
-          </div>
         </div>
-        <div className="flex gap-10 mt-20">
-          <div className="flex flex-col  w-1/2">
+        <div className="flex flex-col sm:flex-row gap-10 mt-20">
+          <div className={`flex flex-col  ${isMobile ? "w-full" : "w-1/2"}`}>
             <Text className="text-5xl font-bold"> Tell us what you need</Text>
 
             <Text className="mt-8">
@@ -89,7 +106,12 @@ function index() {
               eos qui ratione voluptatem sequi nesciunt.
             </Text>
           </div>
-          <Card css={{ w: "50%", h: "300px" }}>
+          <Card
+            css={{
+              w: isMobile ? "100%" : "50%",
+              h: isMobile ? "200px" : "300px",
+            }}
+          >
             <Card.Header css={{ position: "absolute", zIndex: 1, top: 5 }}>
               <Col>
                 <Text
@@ -152,8 +174,8 @@ function index() {
 
         <div className="mx-auto mt-12">
           <iframe
-            width="853"
-            height="480"
+            width={isMobile ? width : 600}
+            height={isMobile ? width * (9 / 16) : 600 * (9 / 16)}
             src={`https://www.youtube.com/embed/sQIx6YeMRR8`}
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -162,15 +184,18 @@ function index() {
           />
         </div>
         <div className="flex flex-col my-12 ">
-          <Text className="text-5xl font-bold mb-12">
-            Tell us what you need
-          </Text>
+          <Text className="text-5xl font-bold mb-12">Discover more</Text>
           <Text className="text-xl mb-8">
             Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil
             impedit quo minus id quod maxime placeat facere possimus, omnis
             voluptas assumenda est, omnis dolor repellendus.
           </Text>
-          <Card css={{ w: "100%", h: "700px" }}>
+          <Card
+            css={{
+              w: "100%",
+              h: isMobile ? "200px" : "700px",
+            }}
+          >
             <Card.Header css={{ position: "absolute", zIndex: 1, top: 5 }}>
               <Col>
                 <Text

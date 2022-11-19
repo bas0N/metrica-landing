@@ -50,7 +50,7 @@ function NavbarComponent() {
     { name: "Pricing", path: "/pricing" },
     { name: "Company", path: "/company" },
     { name: "FAQ", path: "/faq" },
-    { name: "Dashboard", path: "/" },
+    { name: "Dashboard", path: "http://localhost:3002/dashboard" },
   ];
   const onLogout = () => {
     dispatch(logout());
