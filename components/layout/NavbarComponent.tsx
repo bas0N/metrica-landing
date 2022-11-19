@@ -45,16 +45,12 @@ function NavbarComponent() {
   const { setTheme } = useNextTheme();
   const { isDark, type } = useTheme();
   const collapseItems = [
-    "Profile",
-    "Dashboard",
-    "Activity",
-    "Analytics",
-    "System",
-    "Deployments",
-    "My Settings",
-    "Team Settings",
-    "Help & Feedback",
-    "Log Out",
+    { name: "Main", path: "/" },
+    { name: "Offer", path: "/offer" },
+    { name: "Pricing", path: "/pricing" },
+    { name: "Company", path: "/company" },
+    { name: "FAQ", path: "/faq" },
+    { name: "Dashboard", path: "/" },
   ];
   const onLogout = () => {
     dispatch(logout());
@@ -205,21 +201,18 @@ function NavbarComponent() {
       <Navbar.Collapse disableAnimation>
         {collapseItems.map((item, index) => (
           <Navbar.CollapseItem
-            key={item}
-            activeColor="warning"
-            css={{
-              color: index === collapseItems.length - 1 ? "$error" : "",
-            }}
-            isActive={index === 2}
+            key={item.name}
+            activeColor="success"
+            isActive={router.pathname === item.path}
           >
             <UiLink
               color="inherit"
               css={{
                 minWidth: "100%",
               }}
-              href="#"
+              href={item.path}
             >
-              {item}
+              {item.name}
             </UiLink>
           </Navbar.CollapseItem>
         ))}

@@ -10,10 +10,10 @@ export function middleware(request: NextRequest) {
   console.log("cookies");
   console.log(request.cookies);
   ///??????????
-  if ("appSession" in request.cookies) {
-    console.log("redirect");
-    return NextResponse.redirect(new URL("/", request.url));
-  }
+  // if ("appSession" in request.cookies) {
+  //   console.log("redirect");
+  //   return NextResponse.redirect(new URL("/", request.url));
+  // }
   //if includes api in url
   //get token and attach it to the request
 }
