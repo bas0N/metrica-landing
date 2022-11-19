@@ -3,8 +3,8 @@ import React from "react";
 
 function index() {
   return (
-    <div className="flex flex-col mt-6">
-      <h1 className="text-5xl font-bold">FAQ</h1>
+    <div className="flex flex-col mt-6 mx-4 h-screen">
+      <h1 className="text-5xl font-bold mb-8">FAQ</h1>
       <Collapse.Group>
         <Collapse title="Option A">
           <Text>
