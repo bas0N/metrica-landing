@@ -19,12 +19,17 @@ function index() {
     setIsMobile(Mobile());
   });
   return (
-    <div className="flex flex-col  ">
-      <Text className="text-5xl sm:text-7xl  mt-10">How does it work?</Text>
-      <div className="flex flex-col  mt-20  gap-8 mx-2">
+    <div className="flex flex-col px-6 mx-auto max-w-screen-xl lg:py-16 lg:px-6 ">
+      <Text className="text-5xl sm:text-7xl font-extrabold  mt-10">
+        How does it work?
+      </Text>
+
+      <div className="flex flex-col  mt-20  gap-8 ">
         <div className="flex flex-col sm:flex-row gap-10 ">
           <div className={`flex flex-col  ${isMobile ? "w-full" : "w-1/2"}`}>
-            <Text className="text-5xl font-bold">Add your recruitment</Text>
+            <Text className="text-4xl sm:text-5xl font-semibold">
+              Add your recruitment
+            </Text>
             <Text className="mt-8">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -95,7 +100,10 @@ function index() {
         </div>
         <div className="flex flex-col sm:flex-row gap-10 mt-20">
           <div className={`flex flex-col  ${isMobile ? "w-full" : "w-1/2"}`}>
-            <Text className="text-5xl font-bold"> Tell us what you need</Text>
+            <Text className="text-4xl sm:text-5xl font-semibold">
+              {" "}
+              Tell us what you need
+            </Text>
 
             <Text className="mt-8">
               Sed ut perspiciatis unde omnis iste natus error sit voluptatem
@@ -174,7 +182,7 @@ function index() {
 
         <div className="mx-auto mt-12">
           <iframe
-            width={isMobile ? width : 600}
+            width={isMobile ? width - 20 : 600}
             height={isMobile ? width * (9 / 16) : 600 * (9 / 16)}
             src={`https://www.youtube.com/embed/sQIx6YeMRR8`}
             frameBorder="0"
@@ -184,7 +192,9 @@ function index() {
           />
         </div>
         <div className="flex flex-col my-12 ">
-          <Text className="text-5xl font-bold mb-12">Discover more</Text>
+          <Text className="text-4xl sm:text-5xl font-semibold mb-12">
+            Discover more
+          </Text>
           <Text className="text-xl mb-8">
             Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil
             impedit quo minus id quod maxime placeat facere possimus, omnis
