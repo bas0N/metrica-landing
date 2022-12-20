@@ -50,7 +50,9 @@ function NavbarComponent() {
     { name: "Pricing", path: "/pricing" },
     { name: "Company", path: "/company" },
     { name: "FAQ", path: "/faq" },
-    { name: "Dashboard", path: "http://localhost:3002/dashboard" },
+    ...(user
+      ? [{ name: "Dashboard", path: "http://localhost:3002/dashboard" }]
+      : []),
   ];
   const onLogout = () => {
     dispatch(logout());
@@ -58,19 +60,11 @@ function NavbarComponent() {
     setUserState(false);
     router.push("/api/auth/logout");
   };
-  // useEffect(() => {
-  //   fetch("/api/auth/getAccessToken")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //     });
-  //   console.log(user);
-  // }, []);
 
   return (
     <Navbar isBordered variant="sticky">
       <Navbar.Toggle showIn="xs" />
-      <Link href="/">
+      <Link href="http://localhost:3000/">
         <Navbar.Brand
           className="cursor-pointer flex items-center"
           css={{
@@ -102,16 +96,18 @@ function NavbarComponent() {
         <Navbar.Link isActive={router.pathname === "/faq"} href="/faq">
           FAQ
         </Navbar.Link>
-        <Navbar.Link
-          isActive={
-            router.pathname === "/dashboard" ||
-            router.pathname === "/dashboard/send-form" ||
-            router.pathname === "/dashboard/manage-recruitments"
-          }
-          href="/dashboard"
-        >
-          Dashboard
-        </Navbar.Link>
+        {user && (
+          <Navbar.Link
+            isActive={
+              router.pathname === "/dashboard" ||
+              router.pathname === "/dashboard/send-form" ||
+              router.pathname === "/dashboard/manage-recruitments"
+            }
+            href="http://localhost:3002/dashboard"
+          >
+            Dashboard
+          </Navbar.Link>
+        )}
       </Navbar.Content>
       <Navbar.Content
         css={{
@@ -156,7 +152,7 @@ function NavbarComponent() {
                 <Dropdown.Item key="settings" withDivider>
                   <div
                     onClick={() => {
-                      router.push("/dashboard");
+                      router.replace("http://localhost:3002/dashboard");
                     }}
                   >
                     Dashboard
