@@ -47,34 +47,39 @@ function SendFormToApplicant({
     setOption(value);
   };
   const handleSubmit = async () => {
-    try {
-      const res = await fetch(`http://localhost:3001/survey/createSurvey`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: "elam@gmail.com",
-          addSurveyDto: {
-            recipientEmail,
-            candidateFirstName,
-            candidateLastName,
-            surveyStatus: SurveyStatus[1],
-            recruitmentId: option,
-            terminationDate: new Date("2023-10-10"),
-          },
-        }),
-      });
-      if (res.status === 500) {
-        toast.error("Error occured while sending a form.", { theme: "dark" });
-      } else {
-        toast.success("Form sent successfully.", { theme: "dark" });
-        const recruitment: any = await res.json();
-        handleCancel();
-      }
-    } catch (err) {
-      toast.error(JSON.stringify(err), { theme: "dark" });
-    }
+    // try {
+    //   // let res = await fetch(`http://localhost:3002/api/auth/getAccessToken`);
+    //   // const { accessToken } = await res.json();
+    //   // console.log(accessToken.accessToken);
+    //   // console.log("wrr");
+    //   res = await fetch(`http://localhost:3001/survey/createSurvey`, {
+    //     method: "POST",
+    //     headers: {
+    //       Authorization: `Bearer ${accessToken}`,
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({
+    //       addSurveyDto: {
+    //         recipientEmail,
+    //         candidateFirstName,
+    //         candidateLastName,
+    //         surveyStatus: SurveyStatus[1],
+    //         recruitmentId: option,
+    //         terminationDate: new Date("2023-10-10"),
+    //       },
+    //     }),
+    //   });
+    //   if (res.status === 500 || res.status === 401) {
+    //     toast.error("Error occured while sending a form.", { theme: "dark" });
+    //   } else {
+    //     toast.success("Form sent successfully.", { theme: "dark" });
+    //     const recruitment: any = await res.json();
+    //     handleCancel();
+    //   }
+    // } catch (err) {
+    //   toast.error(JSON.stringify(err), { theme: "dark" });
+    // }
+    console.log("landing sbmit");
   };
   const selectReqruitmentData: SelectProps = {
     command: "Choose recruitment process",
