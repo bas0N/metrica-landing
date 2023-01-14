@@ -108,6 +108,7 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
           value={values.recruitmentDeadline}
           name="recruitmentDeadline"
           width="186px"
+          aria-label=""
           label="Questionare ending date"
           type="date"
         />
@@ -115,11 +116,13 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
           onChange={handleInputChange}
           value={values.recruitmentDescription}
           name="recruitmentDescription"
+          aria-label=""
           label="Description"
           helperText="Please enter the description of the reqriutment process"
           placeholder="Enter your name"
         />
         <Radio.Group
+          aria-label=""
           label="Select questionare type"
           value={checked}
           onChange={setChecked}
