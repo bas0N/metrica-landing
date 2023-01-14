@@ -65,7 +65,7 @@ function DashboardLayout({ children }: Props) {
         <Navbar.Content activeColor="success" hideIn="xs" variant="underline">
           <Navbar.Link
             isActive={router.pathname === "/dashboard/send-form"}
-            onPress={() => {
+            onClick={() => {
               router.push("/dashboard/send-form");
               setChosen(2);
             }}
@@ -74,7 +74,7 @@ function DashboardLayout({ children }: Props) {
           </Navbar.Link>
           <Navbar.Link
             isActive={router.pathname === "/dashboard/manage-recruitments"}
-            onPress={() => {
+            onClick={() => {
               router.push("/dashboard/manage-recruitments");
               setChosen(3);
             }}
@@ -84,7 +84,7 @@ function DashboardLayout({ children }: Props) {
 
           <Navbar.Link
             isActive={router.pathname === "/dashboard"}
-            onPress={() => {
+            onClick={() => {
               router.push("/dashboard");
               setChosen(1);
             }}
@@ -215,48 +215,3 @@ function DashboardLayout({ children }: Props) {
 }
 
 export default DashboardLayout;
-
-/*
-
- <Button.Group
-          size="xl"
-          vertical
-          className="bg-green-400 text-inherit p-0 m-0 rounded-t-none"
-        >
-          <Button
-            className={`text-black border-0 hover:bg-green-500 ${
-              chosen === 1 ? "bg-green-500" : ""
-            }`}
-            onPress={() => {
-              router.push("/dashboard");
-              setChosen(1);
-            }}
-          >
-            Manage Forms
-          </Button>
-          <Button
-            className={`text-black border-0 hover:bg-green-500 ${
-              chosen === 2 ? "bg-green-500" : ""
-            }`}
-            onPress={() => {
-              router.push("/dashboard/send-form");
-              setChosen(2);
-            }}
-          >
-            Send Form
-          </Button>
-          <Button
-            className={`text-black border-0 hover:bg-green-500 ${
-              chosen === 3 ? "bg-green-500" : ""
-            }`}
-            onPress={() => {
-              router.push("/dashboard/manage-recruitments");
-              setChosen(3);
-            }}
-          >
-            Manage Recruitments
-          </Button>
-        </Button.Group>
-
-
-*/
