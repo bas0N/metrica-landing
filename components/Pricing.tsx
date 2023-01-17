@@ -5,16 +5,7 @@ import { useRouter } from "next/router";
 function Pricing() {
   const router = useRouter();
   const handleBuy = async (event: any) => {
-    console.log(event.target.value);
-    const res = await fetch(`http://localhost:3001/payment`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ productId: event.target.value }),
-    });
-    const resJSON = await res.json();
-    router.push(resJSON.url);
+    router.push("http://localhost:3002/pricing");
   };
   return (
     <div className="bg-inherit">
