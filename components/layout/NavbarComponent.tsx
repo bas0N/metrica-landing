@@ -143,7 +143,13 @@ function NavbarComponent() {
               >
                 <Dropdown.Item key="profile" css={{ height: "$18" }}>
                   <Text b color="inherit" css={{ d: "flex" }}>
-                    Signed in as
+                    <div
+                      onClick={() => {
+                        router.push("http://localhost:3002/account");
+                      }}
+                    >
+                      Account
+                    </div>
                   </Text>
                   <Text b color="inherit" css={{ d: "flex" }}>
                     {user.email}
