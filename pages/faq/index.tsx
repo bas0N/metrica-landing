@@ -3,47 +3,63 @@ import React from "react";
 
 function index() {
   return (
-    <div className="flex flex-col mt-6 mx-4 h-screen">
+    <div className="flex flex-col mt-6 mx-4 h-">
       <h1 className="text-5xl font-bold mb-8">FAQ</h1>
-      <Collapse.Group>
-        <Collapse title="Option A">
+      <Collapse.Group className="mb-32">
+        <Collapse className="font-bold text-xl" title="What is Metrica?">
           <Text>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            Metrica is a software solution designed to streamline and automate
+            the recruitment process for IT roles. It helps HR personnel to
+            efficiently manage the screening, tracking, and assessment of IT job
+            applicants.
           </Text>
         </Collapse>
-        <Collapse title="Option B">
+        <Collapse
+          className="font-bold text-xl"
+          title="How does the Metrica help save time?"
+        >
           <Text>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            Metrica automates time-consuming tasks such as resume screening and
+            candidate tracking, freeing up HR personnel to focus on more
+            critical aspects of the recruitment process such as interviewing and
+            assessing candidates.
           </Text>
         </Collapse>
-        <Collapse title="Option C">
+        <Collapse
+          className="font-bold text-xl"
+          title="Can I customize the questionnaires for different IT positions?"
+        >
           <Text>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            Yes, Metrica allows you to create custom questionnaires for each IT
+            position. You can tailor the questionnaires to test the specific
+            skills and knowledge required for each role, ensuring that you only
+            receive applications from truly qualified candidates.
           </Text>
         </Collapse>
-        <Collapse title="Option D">
+        <Collapse
+          className="font-bold text-xl"
+          title="How does the recruitment dashboard help with the recruitment process?"
+        >
           <Text>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            The recruitment dashboard summarizes all the answers to the
+            questionnaires in one place, making it easy for HR personnel to
+            compare the results of all currently running recruitment processes
+            and identify the most suitable candidates for each role. The
+            dashboard also provides a birds-eye view of your recruitment
+            efforts, allowing you to track the progress of each process and make
+            informed hiring decisions.
           </Text>
         </Collapse>
-        <Collapse title="Option E">
+        <Collapse
+          className="font-bold text-xl"
+          title="Is Metrica user-friendly?"
+        >
           <Text>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            Yes, Metrica is designed with a user-friendly interface, making it
+            easy for HR personnel to manage the recruitment process efficiently.
+            The questionnaires are also designed to be simple and intuitive,
+            ensuring that candidates have a positive experience while taking
+            them.
           </Text>
         </Collapse>
       </Collapse.Group>

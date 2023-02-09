@@ -28,13 +28,15 @@ function index() {
         <div className="flex flex-col sm:flex-row gap-10 ">
           <div className={`flex flex-col  ${isMobile ? "w-full" : "w-1/2"}`}>
             <Text className="text-4xl sm:text-5xl font-semibold">
-              Add your recruitment
+              Manage your recruitments
             </Text>
             <Text className="mt-8">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
+              Our recruitment management feature is designed to be flexible and
+              customizable, so you can tailor the hiring process to meet your
+              specific needs. Whether you are a small startup or a large
+              multinational corporation, our platform is designed to support
+              your recruitment goals and help you find the best candidates for
+              your open positions.
             </Text>
           </div>
           <Card
@@ -56,62 +58,28 @@ function index() {
             </Card.Header>
             <Card.Body css={{ p: 0 }}>
               <Card.Image
-                src="https://clickup.com/landing/images/main/teams/product.png"
+                src="https://drive.google.com/uc?id=1LCPbCJmuavjFABuITOrSKyNAlBdGlcWO"
                 objectFit="cover"
                 width="100%"
                 height="100%"
                 alt="Relaxing app background"
               />
             </Card.Body>
-            <Card.Footer
-              isBlurred
-              css={{
-                position: "absolute",
-                bgBlur: "#ffffff66",
-                borderTop:
-                  "$borderWeights$light solid rgba(255, 255, 255, 0.2)",
-                bottom: 0,
-                zIndex: 1,
-              }}
-            >
-              <Row>
-                <Col>
-                  <Text color="#000" size={16}>
-                    Get notified.
-                  </Text>
-                </Col>
-                <Col>
-                  <Row justify="flex-end">
-                    <Button flat auto rounded color="secondary">
-                      <Text
-                        css={{ color: "inherit" }}
-                        size={12}
-                        weight="bold"
-                        transform="uppercase"
-                      >
-                        Notify Me
-                      </Text>
-                    </Button>
-                  </Row>
-                </Col>
-              </Row>
-            </Card.Footer>
           </Card>
         </div>
         <div className="flex flex-col sm:flex-row gap-10 mt-20">
           <div className={`flex flex-col  ${isMobile ? "w-full" : "w-1/2"}`}>
             <Text className="text-4xl sm:text-5xl font-semibold">
-              {" "}
-              Tell us what you need
+              Add your processes
             </Text>
 
             <Text className="mt-8">
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-              accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-              quae ab illo inventore veritatis et quasi architecto beatae vitae
-              dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
-              aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
-              eos qui ratione voluptatem sequi nesciunt.
+              Metrica is designed to make the recruitment process smoother and
+              more efficient for IT companies. By allowing adding recruitments
+              processes feature, our tool offers a flexible and customizable
+              solution for managing your recruitment process. This feature
+              allows you to streamline your recruitment process, saving time and
+              effort for you and your team.
             </Text>
           </div>
           <Card
@@ -120,24 +88,9 @@ function index() {
               h: isMobile ? "200px" : "300px",
             }}
           >
-            <Card.Header css={{ position: "absolute", zIndex: 1, top: 5 }}>
-              <Col>
-                <Text
-                  size={12}
-                  weight="bold"
-                  transform="uppercase"
-                  color="#9E9E9E"
-                >
-                  Your day your way
-                </Text>
-                <Text h3 color="white">
-                  Your checklist for better sleep
-                </Text>
-              </Col>
-            </Card.Header>
             <Card.Body css={{ p: 0 }}>
               <Card.Image
-                src="https://clickup.com/images/poster-images/videos/main/dashboard.png"
+                src="https://drive.google.com/uc?id=1hhU4x1GEWp5OO5bOQhiea_I7ba2qMCVy"
                 objectFit="cover"
                 width="100%"
                 height="100%"
@@ -158,19 +111,19 @@ function index() {
               <Row>
                 <Col>
                   <Text color="#000" size={16}>
-                    Get notified.
+                    Manage your recruitments
                   </Text>
                 </Col>
                 <Col>
                   <Row justify="flex-end">
-                    <Button flat auto rounded color="secondary">
+                    <Button flat auto rounded color="success">
                       <Text
                         css={{ color: "inherit" }}
                         size={12}
                         weight="bold"
                         transform="uppercase"
                       >
-                        Notify Me
+                        Check out
                       </Text>
                     </Button>
                   </Row>
@@ -195,10 +148,11 @@ function index() {
           <Text className="text-4xl sm:text-5xl font-semibold mb-12">
             Discover more
           </Text>
-          <Text className="text-xl mb-8">
-            Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil
-            impedit quo minus id quod maxime placeat facere possimus, omnis
-            voluptas assumenda est, omnis dolor repellendus.
+          <Text className="text-xl mb-8 text-center	">
+            The questionnaire is designed to be user-friendly and intuitive, so
+            candidates can complete it quickly and easily. The platform also
+            provides instant validation to ensure that the information provided
+            is accurate and up-to-date.
           </Text>
           <Card
             css={{
@@ -214,16 +168,16 @@ function index() {
                   transform="uppercase"
                   color="#9E9E9E"
                 >
-                  Your day your way
+                  Filling the form{" "}
                 </Text>
                 <Text h3 color="white">
-                  Your checklist for better sleep
+                  Metrica recruitment questionare
                 </Text>
               </Col>
             </Card.Header>
             <Card.Body css={{ p: 0 }}>
               <Card.Image
-                src="https://clickup.com/blog/wp-content/uploads/2021/04/image10-9.gif"
+                src="https://drive.google.com/uc?id=1QMA5ULcDBkqv9mJyQGYvgoKVqGGoEX7f"
                 objectFit="cover"
                 width="100%"
                 height="100%"
@@ -244,24 +198,20 @@ function index() {
               <Row>
                 <Col>
                   <Text color="#000" size={16}>
-                    Get notified.
+                    Filling the form
                   </Text>
                 </Col>
                 <Col>
                   <Row justify="flex-end">
                     <Popover offset={30} placement="right">
                       <Popover.Trigger>
-                        <Button auto bordered color="secondary">
-                          right
+                        <Button auto bordered color="success">
+                          Check out
                         </Button>
                       </Popover.Trigger>
                       <Popover.Content className="w-64">
                         <Text css={{ p: "$10" }}>
-                          This is the content of the popover. This is the
-                          content of the popover. This is the content of the
-                          popover. This is the content of the popover. This is
-                          the content of the popover. This is the content of the
-                          popover.
+                          Description of filling the form process
                         </Text>
                       </Popover.Content>
                     </Popover>

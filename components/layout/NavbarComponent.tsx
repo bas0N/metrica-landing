@@ -148,7 +148,7 @@ function NavbarComponent() {
                         router.push("http://localhost:3002/account");
                       }}
                     >
-                      Account
+                      Signed in as
                     </div>
                   </Text>
                   <Text b color="inherit" css={{ d: "flex" }}>
@@ -164,7 +164,16 @@ function NavbarComponent() {
                     Dashboard
                   </div>
                 </Dropdown.Item>
-                <Dropdown.Item key="team_settings">Team Settings</Dropdown.Item>
+                <Dropdown.Item key="team_settings">
+                  {" "}
+                  <div
+                    onClick={() => {
+                      router.push("http://localhost:3002/account");
+                    }}
+                  >
+                    Account
+                  </div>
+                </Dropdown.Item>
                 <Dropdown.Item key="analytics" withDivider>
                   Analytics
                 </Dropdown.Item>
