@@ -17,7 +17,26 @@ function index() {
   useEffect(() => {
     setWidth(window.innerWidth - 20);
     setIsMobile(Mobile());
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        console.log(entry);
+
+        if (entry.isIntersecting) {
+          console.log("is intersecting");
+          entry.target.classList.add("show-element");
+        } else {
+          console.log("is not intersecting");
+
+          entry.target.classList.remove("show-element");
+        }
+      });
+    });
+    const hiddenElements = document.querySelectorAll(".hide-element");
+    hiddenElements.forEach((el) => {
+      observer.observe(el);
+    });
   });
+
   return (
     <div className="flex flex-col px-6 mx-auto max-w-screen-xl lg:py-16 lg:px-6 ">
       <Text className="text-5xl sm:text-7xl font-extrabold  mt-10">
@@ -25,7 +44,7 @@ function index() {
       </Text>
 
       <div className="flex flex-col  mt-20  gap-8 ">
-        <div className="flex flex-col sm:flex-row gap-10 ">
+        <div className="flex flex-col sm:flex-row gap-10 hide-element ">
           <div className={`flex flex-col  ${isMobile ? "w-full" : "w-1/2"}`}>
             <Text className="text-4xl sm:text-5xl font-semibold">
               Manage your recruitments
@@ -67,7 +86,7 @@ function index() {
             </Card.Body>
           </Card>
         </div>
-        <div className="flex flex-col sm:flex-row gap-10 mt-20">
+        <div className="flex flex-col sm:flex-row gap-10 mt-20 hide-element">
           <div className={`flex flex-col  ${isMobile ? "w-full" : "w-1/2"}`}>
             <Text className="text-4xl sm:text-5xl font-semibold">
               Add your processes
@@ -144,7 +163,7 @@ function index() {
             title="Embedded youtube"
           />
         </div>
-        <div className="flex flex-col my-12 ">
+        <div className="flex flex-col my-12 hide-element">
           <Text className="text-4xl sm:text-5xl font-semibold mb-12">
             Discover more
           </Text>

@@ -3,7 +3,7 @@ import React from "react";
 
 function Faq() {
   return (
-    <div className="mt-16">
+    <div className="my-16">
       <h1 className="text-5xl font-extrabold ml-8">FAQ</h1>
       <Collapse.Group splitted>
         <Collapse className="font-bold text-xl" title="What is Metrica?">

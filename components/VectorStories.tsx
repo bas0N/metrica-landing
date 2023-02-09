@@ -3,7 +3,7 @@ import recruitment from "../assets/recruitment.png";
 import { Button, Container, Image, Link, Spacer } from "@nextui-org/react";
 function VectorStories() {
   return (
-    <div className="flex flex-col items-center max-w-[1280px] mx-auto">
+    <div className="flex flex-col items-center max-w-[1280px] mx-auto ">
       <div className="flex flex-col lg:flex-row items-center">
         <div className="lg:w-1/2 ">
           <h2 className="text-4xl font-bold ">Recruit faster</h2>

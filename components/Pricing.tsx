@@ -1,12 +1,16 @@
 import { Card, Text, Button } from "@nextui-org/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
+import { animationObserver } from "../styles/animationObserver";
 
 function Pricing() {
   const router = useRouter();
   const handleBuy = async (event: any) => {
     router.push("http://localhost:3002/pricing");
   };
+  useEffect(() => {
+    animationObserver();
+  }, []);
   return (
     <div className="bg-inherit">
       <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
@@ -20,7 +24,7 @@ function Pricing() {
             enterprise, we have a plan that will fit your recruitment needs.
           </Text>
         </div>
-        <div className="space-y-8 lg:grid lg:grid-cols-3 sm:gap-6 xl:gap-10 lg:space-y-0">
+        <div className="space-y-8 lg:grid lg:grid-cols-3 sm:gap-6 xl:gap-10 lg:space-y-0 hide-element">
           <Card
             isHoverable
             variant="bordered"
