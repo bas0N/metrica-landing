@@ -51,7 +51,7 @@ function NavbarComponent() {
     { name: "Company", path: "/company" },
     { name: "FAQ", path: "/faq" },
     ...(user
-      ? [{ name: "Dashboard", path: "http://localhost:3002/dashboard" }]
+      ? [{ name: "Dashboard", path: process.env.APP_URL + "/dashboard" }]
       : []),
   ];
   const onLogout = () => {
@@ -64,7 +64,7 @@ function NavbarComponent() {
   return (
     <Navbar isBordered variant="sticky">
       <Navbar.Toggle showIn="xs" />
-      <Link href="http://localhost:3000/">
+      <Link href={`${process.env.LANDING_URL}`}>
         <Navbar.Brand
           className="cursor-pointer flex items-center"
           css={{
@@ -103,7 +103,7 @@ function NavbarComponent() {
               router.pathname === "/dashboard/send-form" ||
               router.pathname === "/dashboard/manage-recruitments"
             }
-            href="http://localhost:3002/dashboard"
+            href={process.env.APP_URL + "/dashboard"}
           >
             Dashboard
           </Navbar.Link>
@@ -145,7 +145,7 @@ function NavbarComponent() {
                   <Text b color="inherit" css={{ d: "flex" }}>
                     <div
                       onClick={() => {
-                        router.push("http://localhost:3002/account");
+                        router.push(process.env.APP_URL + "/account");
                       }}
                     >
                       Signed in as
@@ -158,7 +158,7 @@ function NavbarComponent() {
                 <Dropdown.Item key="settings" withDivider>
                   <div
                     onClick={() => {
-                      router.replace("http://localhost:3002/dashboard");
+                      router.replace(process.env.APP_URL + "/dashboard");
                     }}
                   >
                     Dashboard
@@ -167,7 +167,7 @@ function NavbarComponent() {
                 <Dropdown.Item key="team_settings">
                   <div
                     onClick={() => {
-                      router.push("http://localhost:3002/account");
+                      router.push(process.env.APP_URL + "/account");
                     }}
                   >
                     Account

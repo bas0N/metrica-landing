@@ -6,7 +6,7 @@ import { animationObserver } from "../styles/animationObserver";
 function Pricing() {
   const router = useRouter();
   const handleBuy = async (event: any) => {
-    router.push("http://localhost:3002/pricing");
+    router.push(process.env.APP_URL + "/pricing");
   };
   useEffect(() => {
     animationObserver();

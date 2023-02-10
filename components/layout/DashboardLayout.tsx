@@ -128,7 +128,7 @@ function DashboardLayout({ children }: Props) {
                     <Text b color="inherit" css={{ d: "flex" }}>
                       <div
                         onClick={() => {
-                          router.push("http://localhost:3002/account");
+                          router.push(process.env.APP_URL + "/account");
                         }}
                       >
                         Account

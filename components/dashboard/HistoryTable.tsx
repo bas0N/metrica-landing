@@ -65,7 +65,7 @@ function HistoryTable({
   const handleDelete = async (surveyId: string) => {
     console.log(surveyId);
     try {
-      const res = await fetch(`http://localhost:3001/survey/${surveyId}`, {
+      const res = await fetch(`${process.env.BACKEND_URL}/survey/${surveyId}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -93,7 +93,7 @@ function HistoryTable({
   };
   const handlePageChange = async (page: number) => {
     const res = await fetch(
-      `http://localhost:3001/survey/getSurveysPaginated/${page}`
+      `${process.env.BACKEND_URL}/survey/getSurveysPaginated/${page}`
     );
     const { surveys, pagesAvailable, totalItems }: GetSurveysPaginated =
       await res.json();
