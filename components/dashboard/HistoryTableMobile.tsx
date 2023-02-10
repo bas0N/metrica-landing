@@ -31,7 +31,7 @@ function HistoryTableMobile({
   const handleDelete = async (surveyId: string) => {
     console.log(surveyId);
     try {
-      const res = await fetch(`http://localhost:3001/survey/${surveyId}`, {
+      const res = await fetch(`${process.env.BACKEND_URL}/survey/${surveyId}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -73,7 +73,7 @@ function HistoryTableMobile({
   //   }, []);
   const handlePageChange = async (page: number) => {
     const res = await fetch(
-      `http://localhost:3001/survey/getSurveysPaginated/${page}`
+      `${process.env.BACKEND_URL}/survey/getSurveysPaginated/${page}`
     );
     const { surveys, pagesAvailable, totalItems }: GetSurveysPaginated =
       await res.json();
@@ -88,6 +88,7 @@ function HistoryTableMobile({
         <Collapse.Group splitted>
           {surveysState.map((survey) => (
             <Collapse
+              key={"1"}
               title={
                 <Text h4>
                   {survey.candidateFirstName + " " + survey.candidateLastName}

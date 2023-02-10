@@ -24,6 +24,8 @@ import ThreeStories from "../components/ThreeStories";
 import VectorStories from "../components/VectorStories";
 import Layout from "../components/layout/Layout";
 import DashboardLayout from "../components/layout/DashboardLayout";
+import { useEffect } from "react";
+import { animationObserver } from "../styles/animationObserver";
 const Home = () => {
   const { setTheme } = useNextTheme();
   const { isDark, type } = useTheme();
@@ -40,6 +42,9 @@ const Home = () => {
     "Log Out",
   ];
 
+  useEffect(() => {
+    animationObserver();
+  }, []);
   return (
     <Container>
       <Head>
@@ -49,10 +54,18 @@ const Home = () => {
       </Head>
 
       <main className="max-w-[1280px] mx-auto">
-        <Hero />
-        <VectorStories />
-        <ThreeStories />
-        <Faq />
+        <div className="hide-element">
+          <Hero />
+        </div>
+        <div className="hide-element">
+          <VectorStories />
+        </div>
+        <div className="hide-element">
+          <ThreeStories />
+        </div>
+        <div className="hide-element">
+          <Faq />
+        </div>
       </main>
     </Container>
   );

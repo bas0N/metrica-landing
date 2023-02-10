@@ -51,7 +51,7 @@ function NavbarComponent() {
     { name: "Company", path: "/company" },
     { name: "FAQ", path: "/faq" },
     ...(user
-      ? [{ name: "Dashboard", path: "http://localhost:3002/dashboard" }]
+      ? [{ name: "Dashboard", path: process.env.APP_URL + "/dashboard" }]
       : []),
   ];
   const onLogout = () => {
@@ -64,7 +64,7 @@ function NavbarComponent() {
   return (
     <Navbar isBordered variant="sticky">
       <Navbar.Toggle showIn="xs" />
-      <Link href="http://localhost:3000/">
+      <Link href={`${process.env.LANDING_URL}`}>
         <Navbar.Brand
           className="cursor-pointer flex items-center"
           css={{
@@ -75,7 +75,7 @@ function NavbarComponent() {
         >
           <Logo />
           <Text className="cursor-pointer ml-3" b color="inherit" hideIn="xs">
-            STACK METRICS
+            METRICA
           </Text>
         </Navbar.Brand>
       </Link>
@@ -103,7 +103,7 @@ function NavbarComponent() {
               router.pathname === "/dashboard/send-form" ||
               router.pathname === "/dashboard/manage-recruitments"
             }
-            href="http://localhost:3002/dashboard"
+            href={process.env.APP_URL + "/dashboard"}
           >
             Dashboard
           </Navbar.Link>
@@ -145,10 +145,10 @@ function NavbarComponent() {
                   <Text b color="inherit" css={{ d: "flex" }}>
                     <div
                       onClick={() => {
-                        router.push("http://localhost:3002/account");
+                        router.push(process.env.APP_URL + "/account");
                       }}
                     >
-                      Account
+                      Signed in as
                     </div>
                   </Text>
                   <Text b color="inherit" css={{ d: "flex" }}>
@@ -158,13 +158,21 @@ function NavbarComponent() {
                 <Dropdown.Item key="settings" withDivider>
                   <div
                     onClick={() => {
-                      router.replace("http://localhost:3002/dashboard");
+                      router.replace(process.env.APP_URL + "/dashboard");
                     }}
                   >
                     Dashboard
                   </div>
                 </Dropdown.Item>
-                <Dropdown.Item key="team_settings">Team Settings</Dropdown.Item>
+                <Dropdown.Item key="team_settings">
+                  <div
+                    onClick={() => {
+                      router.push(process.env.APP_URL + "/account");
+                    }}
+                  >
+                    Account
+                  </div>
+                </Dropdown.Item>
                 <Dropdown.Item key="analytics" withDivider>
                   Analytics
                 </Dropdown.Item>
@@ -200,7 +208,7 @@ function NavbarComponent() {
           )}
         </Navbar.Content>
       </Navbar.Content>
-      <Navbar.Collapse disableAnimation>
+      <Navbar.Collapse>
         {collapseItems.map((item, index) => (
           <Navbar.CollapseItem
             key={item.name}
