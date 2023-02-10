@@ -165,7 +165,6 @@ function NavbarComponent() {
                   </div>
                 </Dropdown.Item>
                 <Dropdown.Item key="team_settings">
-                  {" "}
                   <div
                     onClick={() => {
                       router.push("http://localhost:3002/account");
@@ -209,7 +208,7 @@ function NavbarComponent() {
           )}
         </Navbar.Content>
       </Navbar.Content>
-      <Navbar.Collapse disableAnimation>
+      <Navbar.Collapse>
         {collapseItems.map((item, index) => (
           <Navbar.CollapseItem
             key={item.name}
