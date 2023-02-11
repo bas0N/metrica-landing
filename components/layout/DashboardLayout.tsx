@@ -128,7 +128,9 @@ function DashboardLayout({ children }: Props) {
                     <Text b color="inherit" css={{ d: "flex" }}>
                       <div
                         onClick={() => {
-                          router.push(process.env.APP_URL + "/account");
+                          router.push(
+                            process.env.NEXT_PUBLIC_APP_URL + "/account"
+                          );
                         }}
                       >
                         Account
