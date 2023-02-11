@@ -8,7 +8,7 @@ export default handleAuth({
         returnTo: process.env.NEXT_PUBLIC_APP_URL + "/dashboard",
         authorizationParams: {
           audience: process.env.AUTH0_AUDIENCE, // or AUTH0_AUDIENCE
-          redirect_uri: `${process.env.NEXT_PUBLIC_LANDING_URL}/api/auth/callbackwrrrrr`,
+          redirect_uri: `${process.env.NEXT_PUBLIC_LANDING_URL}/api/auth/callback`,
         },
       });
     } catch (error) {
