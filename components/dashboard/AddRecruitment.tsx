@@ -52,7 +52,7 @@ function AddApplication({ recruitments }: { recruitments: Recruitment[] }) {
   const handleSubmit = async () => {
     //console.log({ ...values, checked });
     const res = await fetch(
-      `${process.env.BACKEND_URL}/recruitment/addRecruitment`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/recruitment/addRecruitment`,
       {
         method: "POST",
         headers: {

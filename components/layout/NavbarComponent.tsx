@@ -51,7 +51,12 @@ function NavbarComponent() {
     { name: "Company", path: "/company" },
     { name: "FAQ", path: "/faq" },
     ...(user
-      ? [{ name: "Dashboard", path: process.env.APP_URL + "/dashboard" }]
+      ? [
+          {
+            name: "Dashboard",
+            path: process.env.NEXT_PUBLIC_APP_URL + "/dashboard",
+          },
+        ]
       : []),
   ];
   const onLogout = () => {
@@ -64,7 +69,7 @@ function NavbarComponent() {
   return (
     <Navbar isBordered variant="sticky">
       <Navbar.Toggle showIn="xs" />
-      <Link href={`${process.env.LANDING_URL}`}>
+      <Link href={`${process.env.NEXT_PUBLIC_LANDING_URL}`}>
         <Navbar.Brand
           className="cursor-pointer flex items-center"
           css={{
@@ -103,7 +108,7 @@ function NavbarComponent() {
               router.pathname === "/dashboard/send-form" ||
               router.pathname === "/dashboard/manage-recruitments"
             }
-            href={process.env.APP_URL + "/dashboard"}
+            href={`${process.env.NEXT_PUBLIC_APP_URL}/dashboard`}
           >
             Dashboard
           </Navbar.Link>
@@ -145,7 +150,9 @@ function NavbarComponent() {
                   <Text b color="inherit" css={{ d: "flex" }}>
                     <div
                       onClick={() => {
-                        router.push(process.env.APP_URL + "/account");
+                        router.push(
+                          process.env.NEXT_PUBLIC_APP_URL + "/account"
+                        );
                       }}
                     >
                       Signed in as
@@ -158,7 +165,9 @@ function NavbarComponent() {
                 <Dropdown.Item key="settings" withDivider>
                   <div
                     onClick={() => {
-                      router.replace(process.env.APP_URL + "/dashboard");
+                      router.replace(
+                        process.env.NEXT_PUBLIC_APP_URL + "/dashboard"
+                      );
                     }}
                   >
                     Dashboard
@@ -167,7 +176,7 @@ function NavbarComponent() {
                 <Dropdown.Item key="team_settings">
                   <div
                     onClick={() => {
-                      router.push(process.env.APP_URL + "/account");
+                      router.push(process.env.NEXT_PUBLIC_APP_URL + "/account");
                     }}
                   >
                     Account
